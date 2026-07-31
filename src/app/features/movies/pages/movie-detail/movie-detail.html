@@ -1,0 +1,71 @@
+<section class="movie-detail">
+    <a class="movie-detail__back" routerLink="/">
+        Volver al catalogo
+    </a>
+
+    @if (movie(); as selectedMovie){
+        <article class="movie-detail__layout">
+            <img
+                class="movie-detail__poster"
+                [src]="selectedMovie.posterUrl"
+                [alt]="selectedMovie.title"
+            />
+
+            <div class="movie-detail__content">
+                <p class="movie-detail__eyebrow">
+                    {{ selectedMovie.year }} · {{ selectedMovie.director }}
+                </p>
+
+                <h1>{{ selectedMovie.title }}</h1>
+
+                @if (selectedMovie.originalTitle){
+                    <p class="movie-detail__original-title">
+                        Titulo original: {{ selectedMovie.originalTitle }}
+                    </p>
+                }
+
+                <p class="movie-detail__synopsis">
+                    {{ selectedMovie.synopsis }}
+                </p>
+
+                <div class="movie-detail__rating">
+                    <strong>{{ selectedMovie.averageRating }}/5</strong>
+                    <span>{{ selectedMovie.ratingCount }} votos</span>
+                </div>
+
+                <ul class="movie-detail__genres">
+                    @for (genre of selectedMovie.genres; track genre){
+                        <li>{{ genre }}</li>
+                    }
+                </ul>
+
+                <div class="movie-card__user-rating">
+            <p>Tu puntuación</p>
+
+                    <div class="movie-card__rating-actions">
+                        @for (rating of [1,2,3,4,5]; track rating){
+                            <button 
+                            type="button" 
+                            [class.is-selected]="selectedMovie.userRating === rating"
+                            (click)="rateMovie(rating)"
+                            >
+                                {{ rating }}
+                            </button>
+                        }
+                </div>
+                    <div>
+                        @if (selectedMovie.userRating){
+                            <p class="movie-card__user-choice">
+                                Has puntuado esta película con {{ selectedMovie.userRating }}/5
+                            </p>
+                        }
+                    </div>
+                </div>
+            </div>
+        </article>
+    } @else {
+        <p class="movie-detail__empty">
+            No hemos encontrado esta película
+        </p>
+    }
+</section>

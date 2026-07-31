@@ -1,0 +1,29 @@
+<section class="catalog">
+    <header class = "catalog__header">
+        <div>
+            <p class="catalog__eyebrow">Diario de cine</p>
+            <h1> Explora películas</h1>
+            <p class="catalog__subtitle">
+                Puntua, descubre y organiza las películas que vas viendo.
+            </p>
+        </div>
+
+        <label class="catalog__search">
+            <span>Buscar</span>
+            <input
+                type="search"
+                placeholder="Titulo, director o genero"
+                [value] = "searchTerm()"  #se hace de esta forma porque es un signal() en el ts 
+                (input)="updateSearchTerm($any($event.target).value)"
+            />
+        </label>
+    </header>
+
+    <div class="catalog__grid">
+        @for (movie of filteredMovies(); track movie.id) {
+            <app-movie-card [movie]="movie" (ratingSelected)="rateMovie(movie.id, $event)"/>
+        } @empty {
+            <p class="catalog__empty"> No hay películas que coincidan con la búsqueda.</p>
+        }
+    </div>
+</section>

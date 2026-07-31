@@ -1,0 +1,60 @@
+<article class="movie-card">
+    <img
+        class="movie-card__poster"
+        [src] = "movie().posterUrl"
+        [alt] = "movie().title"
+    />
+
+    <div class="movie-card__content">
+        <div>
+            <h2>
+                <a [routerLink]="['/movies', movie().id]">
+                    {{ movie().title }}
+                </a>
+            </h2>
+            <p class="movie-card__meta">
+                {{ movie().year }} · {{ movie().director }}
+            </p>
+        </div>
+
+        <p class="movie-card__synopsis">{{ movie().synopsis }}</p>
+
+        <div class="movie-card__footer">
+            <span class="movie-card__rating">
+                {{ movie().averageRating }}/5
+            </span>
+
+            <span class="movie-card__votes">
+                {{ movie().ratingCount }} votos
+            </span>
+        </div>
+        <ul class="movie-card__genres">
+            @for (genre of movie().genres; track genre){
+                <li>{{ genre }}</li>
+            }
+        </ul>
+
+        <div class="movie-card__user-rating">
+            <p>Tu puntuación</p>
+
+            <div class="movie-card__rating-actions">
+                @for (rating of [1,2,3,4,5]; track rating){
+                    <button 
+                    type="button" 
+                    [class.is-selected]="movie().userRating === rating"
+                    (click)="ratingSelected.emit(rating)"
+                    >
+                        {{ rating }}
+                    </button>
+                }
+            </div>
+            <div>
+                @if (movie().userRating){
+                    <p class="movie-card__user-choice">
+                        Has puntuado esta película con {{ movie().userRating }}/5
+                    </p>
+                }
+            </div>
+        </div>
+    </div>
+</article>

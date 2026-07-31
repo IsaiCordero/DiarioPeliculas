@@ -1,0 +1,125 @@
+.movie-card {
+  overflow: hidden;
+  border: 1px solid #262d38;
+  border-radius: 8px;
+  background: #181c24;
+}
+
+.movie-card__poster {
+  width: 100%;
+  aspect-ratio: 2 / 3;
+  object-fit: cover;
+  display: block;
+  background: #252b35;
+}
+
+.movie-card__content {
+  display: grid;
+  gap: 16px;
+  padding: 18px;
+}
+
+.movie-card h2 {
+  margin: 0;
+  font-size: 22px;
+}
+
+.movie-card__meta,
+.movie-card__synopsis,
+.movie-card__votes {
+  color: #aab2c0;
+}
+
+.movie-card__meta,
+.movie-card__synopsis {
+  margin: 6px 0 0;
+}
+
+.movie-card__synopsis {
+  line-height: 1.5;
+}
+
+.movie-card__footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.movie-card__rating {
+  color: #45d483;
+  font-weight: 800;
+}
+
+.movie-card__genres {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.movie-card__genres li {
+  border: 1px solid #344052;
+  border-radius: 999px;
+  padding: 5px 9px;
+  color: #c8ced8;
+  font-size: 13px;
+}
+
+.movie-card__user-rating {
+  display: grid;
+  gap: 8px;
+}
+
+.movie-card__user-rating p {
+  margin: 0;
+  color: #c8ced8;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.movie-card__rating-actions {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 6px;
+}
+
+.movie-card__rating-actions button {
+  border: 1px solid #344052;
+  border-radius: 6px;
+  padding: 8px 0;
+  background: #111318;
+  color: #f5f7fb;
+  cursor: pointer;
+  font: inherit;
+  font-weight: 700;
+  transition: transform 160ms ease, border-color 160ms ease, color 160ms ease;
+}
+
+.movie-card__rating-actions button:hover {
+  border-color: #45d483;
+  color: #45d483;
+  transform: scale(1.08);
+}
+
+.movie-card__user-choice {
+  margin: 0;
+  color: #45d483;
+  font-size: 14px;
+}
+
+.movie-card__rating-actions button.is-selected {
+  border-color: #45d483;
+  background: #45d483;
+  color: #111318;
+}
+
+.movie-card h2 a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.movie-card h2 a:hover {
+  color: #45d483;
+}

@@ -1,0 +1,169 @@
+:host {
+  display: block;
+}
+
+.movie-detail {
+  min-height: 100dvh;
+  padding: 48px;
+  background: #111318;
+  color: #f5f7fb;
+}
+
+.movie-detail__back {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 32px;
+  border: 1px solid #45d483;
+  border-radius: 999px;
+  padding: 10px 16px;
+  color: #45d483;
+  font-weight: 700;
+  text-decoration: none;
+  transition: background 160ms ease, color 160ms ease, transform 160ms ease;
+}
+
+.movie-detail__back:hover {
+  background: #45d483;
+  color: #111318;
+  transform: translateY(-1px);
+}
+
+.movie-detail__layout {
+  display: grid;
+  grid-template-columns: minmax(220px, 320px) 1fr;
+  gap: 40px;
+  max-width: 1040px;
+  margin: 0 auto;
+  align-items: start;
+}
+
+.movie-detail__poster {
+  width: 100%;
+  border-radius: 8px;
+  object-fit: cover;
+}
+
+.movie-detail__content {
+  display: grid;
+  gap: 18px;
+}
+
+.movie-detail__eyebrow {
+  margin: 0;
+  color: #45d483;
+  font-weight: 700;
+}
+
+.movie-detail h1 {
+  margin: 0;
+  font-size: 48px;
+}
+
+.movie-detail__original-title,
+.movie-detail__synopsis,
+.movie-detail__rating span,
+.movie-detail__empty {
+  color: #aab2c0;
+}
+
+.movie-detail__original-title,
+.movie-detail__synopsis {
+  margin: 0;
+}
+
+.movie-detail__synopsis {
+  max-width: 720px;
+  line-height: 1.6;
+}
+
+.movie-detail__rating {
+  display: flex;
+  gap: 12px;
+  align-items: baseline;
+}
+
+.movie-detail__rating strong {
+  color: #45d483;
+  font-size: 24px;
+}
+
+.movie-detail__genres {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.movie-detail__genres li {
+  border: 1px solid #344052;
+  border-radius: 999px;
+  padding: 5px 9px;
+  color: #c8ced8;
+  font-size: 13px;
+}
+
+@media (max-width: 760px) {
+  .movie-detail {
+    padding: 28px 18px;
+  }
+
+  .movie-detail__layout {
+    grid-template-columns: 1fr;
+  }
+
+  .movie-detail h1 {
+    font-size: 36px;
+  }
+}
+
+
+.movie-card__user-rating {
+  display: grid;
+  gap: 8px;
+}
+
+.movie-card__user-rating p {
+  margin: 0;
+  color: #c8ced8;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.movie-card__rating-actions {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 6px;
+}
+
+.movie-card__rating-actions button {
+  border: 1px solid #344052;
+  border-radius: 6px;
+  padding: 8px 0;
+  background: #111318;
+  color: #f5f7fb;
+  cursor: pointer;
+  font: inherit;
+  font-weight: 700;
+  transition: transform 160ms ease, border-color 160ms ease, color 160ms ease;
+}
+
+.movie-card__rating-actions button:hover {
+  border-color: #45d483;
+  color: #45d483;
+  transform: scale(1.08);
+}
+
+.movie-card__user-choice {
+  margin: 0;
+  color: #45d483;
+  font-size: 14px;
+}
+
+.movie-card__rating-actions button.is-selected {
+  border-color: #45d483;
+  background: #45d483;
+  color: #111318;
+}
