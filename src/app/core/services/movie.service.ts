@@ -30,6 +30,26 @@ export class MovieService {
             )
         );
     }
+
+    toggleWatched(movieId: number): void {
+        this.movies.update((movies) =>
+            movies.map((movie) =>
+                movie.id == movieId
+                    ? {...movie, watched: !movie.watched}
+                    : movie
+            )
+        );
+    }
+
+    togglePending(movieId: number): void{
+        this.movies.update((movies) =>
+            movies.map((movie) => 
+                movie.id == movieId
+                    ? {...movie, pending: !movie.pending}
+                    : movie
+            )
+        );
+    }
 }
 
 //Esto leerá un Mock pero si añado una API se muede modificar facilmente

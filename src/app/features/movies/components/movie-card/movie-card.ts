@@ -11,4 +11,6 @@ import { RouterLink } from '@angular/router';
 export class MovieCard {
   readonly movie = input.required<Movie>();
   readonly ratingSelected = output<number>();
+  readonly watchedToggled = output<void>();
+  readonly pendingToggled = output<void>();
 }

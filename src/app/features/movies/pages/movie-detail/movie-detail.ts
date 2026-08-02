@@ -21,4 +21,12 @@ export class MovieDetail {
   protected rateMovie(rating: number): void {
     this.movieService.rateMovie(this.movieId, rating);
   }
+
+  protected toggleWatched(): void{
+    this.movieService.toggleWatched(this.movieId);
+  }
+
+  protected togglePending(): void{
+    this.movieService.togglePending(this.movieId);
+  }
 }

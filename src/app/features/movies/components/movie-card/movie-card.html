@@ -17,6 +17,24 @@
             </p>
         </div>
 
+        <button
+            class="movie-card__watched"
+            type="button"
+            [class.is-watched]="movie().watched"
+            (click)="watchedToggled.emit()"
+        >
+            {{movie().watched ? 'Vista' : 'Marcar como vista'}}
+        </button>
+
+        <button
+            class="movie-card__pending"
+            type="button"
+            [class.is-watched] = "movie().pending"
+            (click)="pendingToggled.emit()"
+        >
+            {{ movie().pending ? 'Pendiente' : 'Marcar como pendiente' }}
+        </button>
+
         <p class="movie-card__synopsis">{{ movie().synopsis }}</p>
 
         <div class="movie-card__footer">

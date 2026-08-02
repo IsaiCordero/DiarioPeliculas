@@ -38,7 +38,7 @@ export const MOVIES: Movie[] = [
     synopsis: 'Una niña queda atrapada en un mundo espiritual y debe encontrar la forma de salvar a sus padres.'
   },
   {
-    id: 3,
+    id: 4,
     title: 'Spiderman: Brand New Day',
     originalTitle: 'Spiderman: Brand New Day',
     year: 2026,

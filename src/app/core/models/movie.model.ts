@@ -10,4 +10,6 @@ export interface Movie {
   ratingCount: number;
   synopsis: string;
   userRating?: number;
+  watched?: boolean;
+  pending?: boolean;
 }

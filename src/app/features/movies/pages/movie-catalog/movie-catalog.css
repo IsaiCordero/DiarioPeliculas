@@ -153,3 +153,29 @@
     min-width: 0;
   }
 }
+
+.catalog__filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.catalog__filters button {
+  border: 1px solid #344052;
+  border-radius: 999px;
+  padding: 9px 13px;
+  background: #191d25;
+  color: #c8ced8;
+  cursor: pointer;
+  font: inherit;
+  font-size: 14px;
+  font-weight: 700;
+  transition: background 160ms ease, border-color 160ms ease, color 160ms ease;
+}
+
+.catalog__filters button:hover,
+.catalog__filters button.is-active {
+  border-color: #45d483;
+  background: #45d483;
+  color: #111318;
+}

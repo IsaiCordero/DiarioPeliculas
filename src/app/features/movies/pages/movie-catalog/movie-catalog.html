@@ -13,15 +13,54 @@
             <input
                 type="search"
                 placeholder="Titulo, director o genero"
-                [value] = "searchTerm()"  #se hace de esta forma porque es un signal() en el ts 
+                [value] = "searchTerm()" 
                 (input)="updateSearchTerm($any($event.target).value)"
             />
         </label>
+
+        <div class="catalog__filters" aria-label="Filtro de estado">
+            <button
+                type="button"
+                [class.is-active] = "watchFilter() === 'all'"
+                (click)="updateWatchFilter('all')"
+            >
+                Todas
+            </button>
+
+            <button
+                type="button"
+                [class.is-active] = "watchFilter() === 'watched'"
+                (click)="updateWatchFilter('watched')"
+            >
+                Vistas
+            </button>
+
+            <button
+                type="button"
+                [class.is-active] = "watchFilter() === 'Not watched'"
+                (click)="updateWatchFilter('Not watched')"
+            >
+                No vistas
+            </button>
+
+            <button
+                type="button"
+                [class.is-active] = "watchFilter() === 'pending'"
+                (click)="updateWatchFilter('pending')"
+            >
+                Pendientes
+            </button>
+        </div>
     </header>
 
     <div class="catalog__grid">
         @for (movie of filteredMovies(); track movie.id) {
-            <app-movie-card [movie]="movie" (ratingSelected)="rateMovie(movie.id, $event)"/>
+            <app-movie-card 
+            [movie]="movie" 
+            (ratingSelected)="rateMovie(movie.id, $event)"
+            (watchedToggled)="toggleWatched(movie.id)"
+            (pendingToggled)="togglePending(movie.id)"
+            />
         } @empty {
             <p class="catalog__empty"> No hay películas que coincidan con la búsqueda.</p>
         }

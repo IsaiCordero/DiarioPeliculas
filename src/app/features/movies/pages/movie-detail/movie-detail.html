@@ -23,6 +23,24 @@
                         Titulo original: {{ selectedMovie.originalTitle }}
                     </p>
                 }
+                
+                <button
+                    class="movie-detail__watched"
+                    type="button"
+                    [class.is-watched]="selectedMovie.watched"
+                    (click)="toggleWatched()"
+                >
+                    {{ selectedMovie.watched ? 'Vista' : 'Marca como vista' }}
+                </button>
+
+                <button
+                    class="movie-detail__pending"
+                    type="button"
+                    [class.is-watched] ="selectedMovie.pending"
+                    (click)="togglePending()"
+                >
+                    {{ selectedMovie.pending ? 'Pendiente' : 'Marcar como pendiente' }}
+                </button>
 
                 <p class="movie-detail__synopsis">
                     {{ selectedMovie.synopsis }}
