@@ -15,7 +15,7 @@ export class MovieDetail {
   private readonly movieId = Number(this.route.snapshot.paramMap.get('id'));
 
   protected readonly movie = computed(() =>
-    this.movieService.getMovieById(this.movieId)
+    this.movieService.movies().find((movie) => movie.id === this.movieId)
   );
 
   protected rateMovie(rating: number): void {

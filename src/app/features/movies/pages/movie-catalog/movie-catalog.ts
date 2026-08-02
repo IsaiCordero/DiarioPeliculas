@@ -15,7 +15,7 @@ export class MovieCatalog {
 
   protected readonly searchTerm = signal('');
   protected readonly watchFilter = signal<WatchFilter>('all');
-  protected readonly movies = signal(this.movieService.getMovies());
+  protected readonly movies = this.movieService.movies;
 
   protected readonly filteredMovies = computed(() => {
     const term = this.searchTerm().toLowerCase().trim();
@@ -44,17 +44,14 @@ export class MovieCatalog {
 
   protected rateMovie(movieId: number, rating: number): void {
     this.movieService.rateMovie(movieId, rating);
-    this.movies.set(this.movieService.getMovies());
   }
 
   protected toggleWatched(movieId: number): void {
     this.movieService.toggleWatched(movieId);
-    this.movies.set(this.movieService.getMovies());
   }
 
   protected togglePending(movieId: number): void{
     this.movieService.togglePending(movieId);
-    this.movies.set(this.movieService.getMovies());
   }
 
   protected updateWatchFilter(filter: WatchFilter): void{

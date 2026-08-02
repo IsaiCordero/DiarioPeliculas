@@ -1,4 +1,4 @@
-import { effect, Injectable, signal } from "@angular/core";
+import { computed, effect, Injectable, signal } from "@angular/core";
 import { MOVIES } from "../data/movies.mock";
 import { Movie } from "../models/movie.model";
 
@@ -11,14 +11,15 @@ import { Movie } from "../models/movie.model";
 
 export class MovieService {
 
-    private readonly movies = signal<Movie[]>(MOVIES);
-    private readonly storageKey = 'movie-app-state';
+    private readonly moviesState = signal<Movie[]>(MOVIES);
+    readonly movies = computed(() => this.moviesState());
+    private readonly storageKey = 'movie-app-storage';
 
     constructor() {
-        this.movies.set(this.loadMovies());
+        this.moviesState.set(this.loadMovies());
 
         effect(() => {
-            const moviesState = this.movies().map((movie) => ({
+            const moviesState = this.moviesState().map((movie) => ({
                 id: movie.id,
                 userRating: movie.userRating,
                 watched: movie.watched,
@@ -30,15 +31,15 @@ export class MovieService {
     }
 
     getMovies(): Movie[] {
-        return this.movies();
+        return this.moviesState();
     }
 
     getMovieById(id: number): Movie | undefined {
-        return this.movies().find((movie) => movie.id === id);
+        return this.moviesState().find((movie) => movie.id === id);
     }
 
     rateMovie(movieId: number, rating: number): void{
-        this.movies.update((movies) =>
+        this.moviesState.update((movies) =>
             movies.map((movie) =>
                 movie.id == movieId
                     ? { ...movie, userRating: rating}
@@ -48,7 +49,7 @@ export class MovieService {
     }
 
     toggleWatched(movieId: number): void {
-        this.movies.update((movies) =>
+        this.moviesState.update((movies) =>
             movies.map((movie) =>
                 movie.id == movieId
                     ? {...movie, watched: !movie.watched}
@@ -58,7 +59,7 @@ export class MovieService {
     }
 
     togglePending(movieId: number): void{
-        this.movies.update((movies) =>
+        this.moviesState.update((movies) =>
             movies.map((movie) => 
                 movie.id == movieId
                     ? {...movie, pending: !movie.pending}
