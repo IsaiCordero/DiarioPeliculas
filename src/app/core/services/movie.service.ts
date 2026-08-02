@@ -1,4 +1,4 @@
-import { Injectable, signal } from "@angular/core";
+import { effect, Injectable, signal } from "@angular/core";
 import { MOVIES } from "../data/movies.mock";
 import { Movie } from "../models/movie.model";
 
@@ -12,6 +12,22 @@ import { Movie } from "../models/movie.model";
 export class MovieService {
 
     private readonly movies = signal<Movie[]>(MOVIES);
+    private readonly storageKey = 'movie-app-state';
+
+    constructor() {
+        this.movies.set(this.loadMovies());
+
+        effect(() => {
+            const moviesState = this.movies().map((movie) => ({
+                id: movie.id,
+                userRating: movie.userRating,
+                watched: movie.watched,
+                pending: movie.pending,
+            }));
+
+            localStorage.setItem(this.storageKey, JSON.stringify(moviesState));
+        });
+    }
 
     getMovies(): Movie[] {
         return this.movies();
@@ -49,6 +65,32 @@ export class MovieService {
                     : movie
             )
         );
+    }
+
+    private loadMovies(): Movie[]{
+        const rawState = localStorage.getItem(this.storageKey);
+
+        if(!rawState){
+            return MOVIES;
+        }
+
+        const savedState = JSON.parse(rawState) as Pick<
+            Movie,
+            'id' | 'userRating' | 'watched' | 'pending'
+        >[];
+
+        return MOVIES.map((movie) => {
+            const savedMovie = savedState.find((item) => item.id === movie.id);
+
+            return savedMovie
+                ? {
+                    ...movie,
+                    userRating: savedMovie.userRating,
+                    watched: savedMovie.watched,
+                    pending: savedMovie.pending,
+                  }
+                : movie;
+        });
     }
 }
 
