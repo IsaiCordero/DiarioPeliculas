@@ -24,7 +24,7 @@
                 [class.is-active] = "watchFilter() === 'all'"
                 (click)="updateWatchFilter('all')"
             >
-                Todas
+                Todas ({{moviesStats().total}})
             </button>
 
             <button
@@ -32,7 +32,7 @@
                 [class.is-active] = "watchFilter() === 'watched'"
                 (click)="updateWatchFilter('watched')"
             >
-                Vistas
+                Vistas ({{moviesStats().watched}})
             </button>
 
             <button
@@ -40,7 +40,7 @@
                 [class.is-active] = "watchFilter() === 'Not watched'"
                 (click)="updateWatchFilter('Not watched')"
             >
-                No vistas
+                No vistas ({{moviesStats().notWatched}})
             </button>
 
             <button
@@ -48,8 +48,40 @@
                 [class.is-active] = "watchFilter() === 'pending'"
                 (click)="updateWatchFilter('pending')"
             >
-                Pendientes
+                Pendientes ({{moviesStats().pending}})
             </button>
+        </div>
+
+        <div class="catalog__genre-filter">
+            <label for="genre-filter">Genero</label>
+
+            <select
+                id="genre-filter"
+                [value]="selectedGenre()"
+                (change)="updateSelectedGenre($any($event.target).value)"
+            >
+                @for (genre of availableGenres(); track genre) {
+                    <option [value]="genre">
+                        {{genre === 'all' ? 'Todos los generos': genre}}
+                    </option>
+                }
+            </select>
+        </div>
+
+        <div class="catalog__sort">
+            <label for="sort-by">Ordenar por</label>
+
+            <select
+                id="sort-by"
+                [value]="sortBy()"
+                (change)="updateSortBy($any($event.target).value)"
+            >
+                <option value="title">Título</option>
+                <option value="year">Año</option>
+                <option value="average-rating">Nota media</option>
+                <option value="most-voted">Mas votadas</option>
+                <option value="user-rating">Mi puntuación</option>
+            </select>
         </div>
     </header>
 

@@ -179,3 +179,46 @@
   background: #45d483;
   color: #111318;
 }
+.catalog__genre-filter {
+  display: grid;
+  gap: 8px;
+  min-width: 220px;
+  color: #c8ced8;
+  font-size: 14px;
+}
+
+.catalog__genre-filter label {
+  font-weight: 700;
+}
+
+.catalog__genre-filter select {
+  border: 1px solid #2d3440;
+  border-radius: 8px;
+  padding: 12px 14px;
+  background: #191d25;
+  color: #f5f7fb;
+  cursor: pointer;
+  font: inherit;
+}
+
+.catalog__sort {
+  display: grid;
+  gap: 8px;
+  min-width: 220px;
+  color: #c8ced8;
+  font-size: 14px;
+}
+
+.catalog__sort label {
+  font-weight: 700;
+}
+
+.catalog__sort select {
+  border: 1px solid #2d3440;
+  border-radius: 8px;
+  padding: 12px 14px;
+  background: #191d25;
+  color: #f5f7fb;
+  cursor: pointer;
+  font: inherit;
+}
