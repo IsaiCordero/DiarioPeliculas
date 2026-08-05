@@ -24,6 +24,7 @@ export class MovieService {
                 userRating: movie.userRating,
                 watched: movie.watched,
                 pending: movie.pending,
+                review: movie.review
             }));
 
             localStorage.setItem(this.storageKey, JSON.stringify(moviesState));
@@ -77,7 +78,7 @@ export class MovieService {
 
         const savedState = JSON.parse(rawState) as Pick<
             Movie,
-            'id' | 'userRating' | 'watched' | 'pending'
+            'id' | 'userRating' | 'watched' | 'pending' | 'review'
         >[];
 
         return MOVIES.map((movie) => {
@@ -89,9 +90,20 @@ export class MovieService {
                     userRating: savedMovie.userRating,
                     watched: savedMovie.watched,
                     pending: savedMovie.pending,
+                    review: savedMovie.review
                   }
                 : movie;
         });
+    }
+
+    updateReview(movieId:number, review: string): void {
+        this.moviesState.update((movies) => 
+            movies.map((movie) =>
+                movie.id === movieId
+                    ? {...movie, review }
+                    : movie
+            )
+        );
     }
 }
 

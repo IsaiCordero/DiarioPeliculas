@@ -57,7 +57,25 @@
                     }
                 </ul>
 
-                <div class="movie-card__user-rating">
+        <div class="movie-detail__review">
+            <label for="movie-review">Mi reseña</label>
+
+            <textarea
+                id="movie-review"
+                rows="5"
+                placeholder="Escribe que te ha parecido la película"
+                [value]="selectedMovie.review ?? ''"
+                (input)="updateReview($any($event.target).value)"
+            ></textarea>
+
+            @if (selectedMovie.review) {
+                <p class="movie-detail__review-preview">
+                    {{selectedMovie.review}}
+                </p>
+            }
+        </div>
+
+        <div class="movie-card__user-rating">
             <p>Tu puntuación</p>
 
                     <div class="movie-card__rating-actions">

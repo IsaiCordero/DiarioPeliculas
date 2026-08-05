@@ -12,4 +12,5 @@ export interface Movie {
   userRating?: number;
   watched?: boolean;
   pending?: boolean;
+  review?: string;
 }

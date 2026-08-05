@@ -85,6 +85,30 @@
         </div>
     </header>
 
+    @if(reviewedMovies().length > 0) {
+        <section class="catalog__reviews">
+            <div class="catalog__reviews-header">
+                <h2>Mis reseñas</h2>
+                <span>{{ reviewedMovies().length }}</span>
+            </div>
+
+            <div class="catalog__reviews-list">
+                @for (movie of reviewedMovies(); track movie.id) {
+                    <article class="catalog__review">
+                        <div>
+                            <h3>{{ movie.title }}</h3>
+                            <p>{{ movie.review }}</p>
+                        </div>
+
+                        <a [routerLink]="['/movies', movie.id]">
+                            Ver detalle
+                        </a>
+                    </article>
+                }
+            </div>
+        </section>
+    }
+
     <div class="catalog__grid">
         @for (movie of filteredMovies(); track movie.id) {
             <app-movie-card 

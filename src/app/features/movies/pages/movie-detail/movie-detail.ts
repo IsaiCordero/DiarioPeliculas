@@ -29,4 +29,8 @@ export class MovieDetail {
   protected togglePending(): void{
     this.movieService.togglePending(this.movieId);
   }
+
+  protected updateReview(review: string): void{
+    this.movieService.updateReview(this.movieId, review);
+  }
 }

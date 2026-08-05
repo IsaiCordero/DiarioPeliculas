@@ -207,3 +207,40 @@
   background: #45d483;
   color: #111318;
 }
+
+.movie-detail__review {
+  display: grid;
+  gap: 10px;
+  max-width: 680px;
+}
+
+.movie-detail__review label {
+  color: #f5f7fb;
+  font-weight: 800;
+}
+
+.movie-detail__review textarea {
+  width: 100%;
+  min-height: 140px;
+  border: 1px solid #2d3440;
+  border-radius: 8px;
+  padding: 12px 14px;
+  resize: vertical;
+  background: #191d25;
+  color: #f5f7fb;
+  font: inherit;
+  line-height: 1.5;
+}
+
+.movie-detail__review textarea:focus {
+  border-color: #45d483;
+  outline: none;
+}
+
+.movie-detail__review-preview {
+  margin: 0;
+  border-left: 3px solid #45d483;
+  padding-left: 12px;
+  color: #c8ced8;
+  line-height: 1.5;
+}

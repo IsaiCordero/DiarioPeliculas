@@ -1,13 +1,14 @@
 import { Component, computed, inject, signal } from '@angular/core';
 import { MovieService } from '../../../../core/services/movie.service';
 import { MovieCard } from '../../components/movie-card/movie-card';
+import { RouterLink } from '@angular/router';
 
 type WatchFilter = 'all' | 'watched' | 'pending' | 'Not watched';
 type SortBy = 'title' | 'year' | 'average-rating' | 'most-voted' | 'user-rating';
 
 @Component({
   selector: 'app-movie-catalog',
-  imports: [MovieCard],
+  imports: [MovieCard, RouterLink],
   templateUrl: './movie-catalog.html',
   styleUrl: './movie-catalog.css',
 })
@@ -116,4 +117,8 @@ export class MovieCatalog {
   protected updateSortBy(value: SortBy): void {
     this.sortBy.set(value);
   }
+
+  protected readonly reviewedMovies = computed(() => 
+  this.movies().filter((movie) => movie.review?.trim())
+  );
 }
