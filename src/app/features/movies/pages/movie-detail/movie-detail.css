@@ -244,3 +244,27 @@
   color: #c8ced8;
   line-height: 1.5;
 }
+
+.movie-detail__watched-date {
+  display: grid;
+  gap: 8px;
+  max-width: 260px;
+  color: #c8ced8;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.movie-detail__watched-date input {
+  border: 1px solid #2d3440;
+  border-radius: 8px;
+  padding: 10px 12px;
+  background: #191d25;
+  color: #f5f7fb;
+  cursor: pointer;
+  font: inherit;
+}
+
+.movie-detail__watched-date input:focus {
+  border-color: #45d483;
+  outline: none;
+}

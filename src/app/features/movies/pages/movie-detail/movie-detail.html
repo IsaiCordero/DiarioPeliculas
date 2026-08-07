@@ -75,6 +75,15 @@
             }
         </div>
 
+        <label class="movie-detail__watched-date">
+            <span>Fecha de visionado</span>
+            <input 
+                type="date"
+                [value]="selectedMovie.watchedDate ?? ''"
+                (change)="updateWatchedDate($any($event.target).value)"
+            />
+        </label>
+
         <div class="movie-card__user-rating">
             <p>Tu puntuación</p>
 

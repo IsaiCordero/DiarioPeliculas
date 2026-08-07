@@ -33,4 +33,8 @@ export class MovieDetail {
   protected updateReview(review: string): void{
     this.movieService.updateReview(this.movieId, review);
   }
+
+  protected updateWatchedDate(watchedDate: string): void{
+    this.movieService.updateWatchedDate(this.movieId, watchedDate);
+  }
 }

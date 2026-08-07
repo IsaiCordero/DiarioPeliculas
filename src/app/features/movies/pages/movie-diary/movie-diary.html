@@ -1,0 +1,49 @@
+<section class="movie-diary">
+    <a class="movie-diary__back" routerLink="/">
+        Volver al catálogo
+    </a>
+    <header class="movie-diary__header">
+        <p>Diario de cine</p>
+        <h1>Mis visionados</h1>
+    </header>
+
+    @if (diaryMovies().length > 0) {
+        <div class="movie-diary__list">
+            @for (movie of diaryMovies(); track movie.id) {
+                <article class="movie-dairy__entry">
+                    <time [attr.datetime]="movie.watchedDate">
+                        {{movie.watchedDate}}
+                    </time>
+
+                    <div class="movie-diary__content">
+                        <h2>
+                            <a [routerLink]="['/movies', movie.id]">
+                                {{movie.title}}
+                            </a>
+                        </h2>
+
+                        <p>
+                            {{movie.year}} · {{movie.director}}
+                        </p>
+
+                        @if (movie.userRating){
+                            <strong>{{movie.userRating}}/5</strong>
+                        } @else{
+                            <span>Sin puntuación</span>
+                        }
+
+                        @if (movie.review) {
+                            <blockquote>
+                                {{movie.review}}
+                            </blockquote>
+                        }
+                    </div>
+                </article>
+            }
+        </div>
+    } @else {
+        <p class="movie-diary__empty">
+            Todavia no has registrado ningún visionado.
+        </p>
+    }
+</section>

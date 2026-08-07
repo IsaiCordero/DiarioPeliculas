@@ -24,7 +24,8 @@ export class MovieService {
                 userRating: movie.userRating,
                 watched: movie.watched,
                 pending: movie.pending,
-                review: movie.review
+                review: movie.review,
+                watchedDate: movie.watchedDate
             }));
 
             localStorage.setItem(this.storageKey, JSON.stringify(moviesState));
@@ -51,12 +52,23 @@ export class MovieService {
 
     toggleWatched(movieId: number): void {
         this.moviesState.update((movies) =>
-            movies.map((movie) =>
-                movie.id == movieId
-                    ? {...movie, watched: !movie.watched}
-                    : movie
-            )
+            movies.map((movie) => {
+                if(movie.id !== movieId){
+                    return movie;
+                }
+
+                const nextWatched = !movie.watched;
+
+                return{
+                    ...movie,
+                    watched: nextWatched,
+                    watchedDate: nextWatched ? this.getTodayDate() : undefined
+                }
+            })
         );
+    }
+    private getTodayDate(): string {
+        return new Date().toISOString().slice(0, 10);
     }
 
     togglePending(movieId: number): void{
@@ -78,7 +90,7 @@ export class MovieService {
 
         const savedState = JSON.parse(rawState) as Pick<
             Movie,
-            'id' | 'userRating' | 'watched' | 'pending' | 'review'
+            'id' | 'userRating' | 'watched' | 'pending' | 'review' | 'watchedDate'
         >[];
 
         return MOVIES.map((movie) => {
@@ -90,7 +102,8 @@ export class MovieService {
                     userRating: savedMovie.userRating,
                     watched: savedMovie.watched,
                     pending: savedMovie.pending,
-                    review: savedMovie.review
+                    review: savedMovie.review,
+                    watchedDate: savedMovie.watchedDate
                   }
                 : movie;
         });
@@ -101,6 +114,20 @@ export class MovieService {
             movies.map((movie) =>
                 movie.id === movieId
                     ? {...movie, review }
+                    : movie
+            )
+        );
+    }
+
+    updateWatchedDate(movieId: number, watchedDate: string): void{
+        this.moviesState.update((movies) =>
+            movies.map((movie) =>
+                movie.id === movieId
+                    ? {
+                        ...movie,
+                        watchedDate: watchedDate || undefined,
+                        watched: Boolean(watchedDate),
+                    }
                     : movie
             )
         );

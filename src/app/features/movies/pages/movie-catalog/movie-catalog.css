@@ -310,3 +310,22 @@
     width: fit-content;
   }
 }
+.catalog__diary-link {
+  display: inline-flex;
+  width: fit-content;
+  margin-top: 16px;
+  border: 1px solid #45d483;
+  border-radius: 999px;
+  padding: 8px 13px;
+  color: #45d483;
+  font-size: 14px;
+  font-weight: 800;
+  text-decoration: none;
+  transition: background 160ms ease, color 160ms ease, transform 160ms ease;
+}
+
+.catalog__diary-link:hover {
+  background: #45d483;
+  color: #111318;
+  transform: translateY(-1px);
+}
