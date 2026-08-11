@@ -55,17 +55,10 @@
         <div class="movie-card__user-rating">
             <p>Tu puntuación</p>
 
-            <div class="movie-card__rating-actions">
-                @for (rating of [1,2,3,4,5]; track rating){
-                    <button 
-                    type="button" 
-                    [class.is-selected]="movie().userRating === rating"
-                    (click)="ratingSelected.emit(rating)"
-                    >
-                        {{ rating }}
-                    </button>
-                }
-            </div>
+            <app-rating-selector
+                [value]="movie().userRating"
+                (valueSelected)="ratingSelected.emit($event)"
+            />
             <div>
                 @if (movie().userRating){
                     <p class="movie-card__user-choice">

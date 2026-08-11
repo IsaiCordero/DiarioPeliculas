@@ -1,0 +1,29 @@
+<header class="app-header">
+    <a class="app-header__brand" routerLink="/">
+        MovieLog
+    </a>
+
+    <nav class="app-header__nav" aria-label="Navegacion principal">
+        <a 
+            routerLink="/"
+            routerLinkActive="is-active"
+            [routerLinkActiveOptions]="{ exact: true }"
+        >
+            Catálogo
+        </a>
+
+        <a 
+            routerLink="/movies/diary"
+            routerLinkActive="is-active"
+        >
+            Diario
+        </a>
+
+        <a
+            routerLink="/movies/stats"
+            routerLinkActive="is-active"
+        >
+            Estadisticas
+        </a>
+    </nav>
+</header>

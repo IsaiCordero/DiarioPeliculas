@@ -1,10 +1,11 @@
 import { Component, computed, inject } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { MovieService } from '../../../../core/services/movie.service';
+import { RatingSelector } from '../../../../shared/components/rating-selector/rating-selector';
 
 @Component({
   selector: 'app-movie-detail',
-  imports: [RouterLink],
+  imports: [RouterLink, RatingSelector],
   templateUrl: './movie-detail.html',
   styleUrl: './movie-detail.css',
 })

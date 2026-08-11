@@ -79,40 +79,10 @@
   font-weight: 700;
 }
 
-.movie-card__rating-actions {
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  gap: 6px;
-}
-
-.movie-card__rating-actions button {
-  border: 1px solid #344052;
-  border-radius: 6px;
-  padding: 8px 0;
-  background: #111318;
-  color: #f5f7fb;
-  cursor: pointer;
-  font: inherit;
-  font-weight: 700;
-  transition: transform 160ms ease, border-color 160ms ease, color 160ms ease;
-}
-
-.movie-card__rating-actions button:hover {
-  border-color: #45d483;
-  color: #45d483;
-  transform: scale(1.08);
-}
-
 .movie-card__user-choice {
   margin: 0;
   color: #45d483;
   font-size: 14px;
-}
-
-.movie-card__rating-actions button.is-selected {
-  border-color: #45d483;
-  background: #45d483;
-  color: #111318;
 }
 
 .movie-card h2 a {

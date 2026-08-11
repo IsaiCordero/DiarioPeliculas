@@ -1,0 +1,11 @@
+<div class="rating-selector">
+    @for (rating of ratings; track rating){
+        <button
+            type="button"
+            [class.is-selected]="value() === rating"
+            (click)="valueSelected.emit(rating)"
+        >
+            {{ rating }}
+        </button>
+    }
+</div>

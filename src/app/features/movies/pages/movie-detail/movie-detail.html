@@ -1,7 +1,4 @@
 <section class="movie-detail">
-    <a class="movie-detail__back" routerLink="/">
-        Volver al catalogo
-    </a>
 
     @if (movie(); as selectedMovie){
         <article class="movie-detail__layout">
@@ -87,17 +84,10 @@
         <div class="movie-card__user-rating">
             <p>Tu puntuación</p>
 
-                    <div class="movie-card__rating-actions">
-                        @for (rating of [1,2,3,4,5]; track rating){
-                            <button 
-                            type="button" 
-                            [class.is-selected]="selectedMovie.userRating === rating"
-                            (click)="rateMovie(rating)"
-                            >
-                                {{ rating }}
-                            </button>
-                        }
-                </div>
+                    <app-rating-selector
+                        [value]="selectedMovie.userRating"
+                        (valueSelected)="rateMovie($event)"
+                    />
                     <div>
                         @if (selectedMovie.userRating){
                             <p class="movie-card__user-choice">

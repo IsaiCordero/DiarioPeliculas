@@ -1,0 +1,57 @@
+<section class="movie-stats">
+    <header class="movie-stats__header">
+        <p>Resumen personal</p>
+        <h1>Estadísticas</h1>
+    </header>
+
+    <div class="movie-stats__grid">
+        <article>
+            <span>Total</span>
+            <strong>{{stats().total}}</strong>
+        </article>
+
+        <article>
+            <span>Vistas</span>
+            <strong>{{stats().watched}}</strong>
+        </article>
+
+        <article>
+            <span>Pendientes</span>
+            <strong>{{stats().pending}}</strong>
+        </article>
+
+        <article>
+            <span>Puntuadas</span>
+            <strong>{{stats().rated}}</strong>
+        </article>
+
+        <article>
+            <span>Reseñas</span>
+            <strong>{{stats().reviewed}}</strong>
+        </article>
+
+        <article>
+            <span>Meida personal</span>
+            <strong>{{stats().averageUserRating | number:'1.1-1'}}/5</strong>
+        </article>
+    </div>
+
+    <section class="movie-stats__highlights">
+        <article>
+            <span>Genero más visto</span>
+            <strong>{{stats().favoriteGenre}}</strong>
+        </article>
+
+        <article>
+            <span>Ultima vista</span>
+
+            @if (stats().lastWatched; as movie){
+                <strong>{{movie.title}}</strong>
+                <p>{{movie.watchedDate}}</p>
+                <a [routerLink]="['/movies', movie.id]">Ver detalle</a>
+            } @else {
+                <strong>Sin datos</strong>
+            }
+        </article>
+    </section>
+</section>
