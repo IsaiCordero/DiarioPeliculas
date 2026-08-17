@@ -1,0 +1,25 @@
+<div class="movie-status-actions">
+    <button
+        type="button"
+        [class.is-active]="watched()"
+        (click)="watchedToggled.emit()"
+    >
+        {{ watched() ? 'Vista' : 'Marcar como vista' }}
+    </button>
+
+    <button
+        type="button"
+        [class.is-active]="pending()"
+        (click)="pendingToggled.emit()"
+    >
+        {{ pending() ? 'Pendiente' : 'Marcar como pendiente' }}
+    </button>
+
+    <button
+        type="button"
+        [class.is-active]="favorite()"
+        (click)="favoriteToggled.emit()"
+    >
+        {{ favorite() ? 'Favorita' : 'Marcar como favorita' }}
+    </button>
+</div>

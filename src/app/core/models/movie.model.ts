@@ -14,4 +14,5 @@ export interface Movie {
   pending?: boolean;
   review?: string;
   watchedDate?: string;
+  favorite?: boolean;
 }

@@ -46,6 +46,7 @@ export class MovieStats {
       pending: pendingMovies.length,
       rated: ratedMovies.length,
       reviewed: movies.filter((movie) => movie.review?.trim()).length,
+      favorite: movies.filter((movie) => movie.favorite).length,
       averageUserRating,
       favoriteGenre,
       lastWatched

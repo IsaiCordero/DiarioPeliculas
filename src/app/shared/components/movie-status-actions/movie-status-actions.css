@@ -1,0 +1,30 @@
+:host {
+  display: block;
+}
+
+.movie-status-actions {
+  display: grid;
+  gap: 8px;
+  justify-items: start;
+}
+
+.movie-status-actions button {
+  width: fit-content;
+  border: 1px solid #344052;
+  border-radius: 999px;
+  padding: 8px 12px;
+  background: transparent;
+  color: #c8ced8;
+  cursor: pointer;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 700;
+  transition: background 160ms ease, border-color 160ms ease, color 160ms ease;
+}
+
+.movie-status-actions button:hover,
+.movie-status-actions button.is-active {
+  border-color: #45d483;
+  background: #45d483;
+  color: #111318;
+}

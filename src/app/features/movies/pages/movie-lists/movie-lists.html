@@ -1,0 +1,64 @@
+<section class="movie-lists">
+    <header class="movie-lists__header">
+        <p>Colecciones personales</p>
+        <h1>Mis listas</h1>
+    </header>
+
+    <form class="movie-lists__form" (submit)="$event.preventDefault(); createList()">
+        <label>
+            Nombre
+            <input
+                type="text"
+                placeholder="EJ. Top ciencia ficción"
+                [value]="listName()"
+                (input)="listName.set($any($event.target).value)"
+            />
+        </label>
+
+        <label>
+            Descripción
+            <textarea
+                rows="3"
+                placeholder="Describe esta lista"
+                [value]="listDescription()"
+                (input)="listDescription.set($any($event.target).value)"
+            ></textarea>
+        </label>
+
+        <button type="submit">Crear lista</button>
+    </form>
+
+    @if (lists().length > 0){
+        <div class="movie-lists__grid">
+            @for (list of lists(); track list.id){
+                <article class="movie-lists__card">
+                    <div>
+                        <h2>{{ list.name }}</h2>
+
+                        @if (list.description){
+                            <p>{{ list.description }}</p>
+                        }
+
+                        <span>{{ list.movieIds.length }} películas</span>
+                    </div>
+
+                    @if (list.movieIds.length > 0){
+                        <ul>
+                            @for (movieId of list.movieIds; track movieId){
+                                <li>{{ getMovieTitle(movieId) }}</li>
+                            }
+                        </ul>
+                    }
+
+                    <button type="button" (click)="deleteList(list.id)">
+                        Borrar
+                    </button>
+                </article>
+            }
+        </div>
+    } @else{
+        <p class="movie-lists__empty">
+            Todavía no has creado ninguna lista.
+        </p>
+    }
+</section>

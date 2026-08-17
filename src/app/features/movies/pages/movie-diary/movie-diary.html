@@ -7,7 +7,7 @@
     @if (diaryMovies().length > 0) {
         <div class="movie-diary__list">
             @for (movie of diaryMovies(); track movie.id) {
-                <article class="movie-dairy__entry">
+                <article class="movie-diary__entry">
                     <time [attr.datetime]="movie.watchedDate">
                         {{movie.watchedDate}}
                     </time>

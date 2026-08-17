@@ -25,7 +25,8 @@ export class MovieService {
                 watched: movie.watched,
                 pending: movie.pending,
                 review: movie.review,
-                watchedDate: movie.watchedDate
+                watchedDate: movie.watchedDate,
+                favorite: movie.favorite
             }));
 
             localStorage.setItem(this.storageKey, JSON.stringify(moviesState));
@@ -90,7 +91,7 @@ export class MovieService {
 
         const savedState = JSON.parse(rawState) as Pick<
             Movie,
-            'id' | 'userRating' | 'watched' | 'pending' | 'review' | 'watchedDate'
+            'id' | 'userRating' | 'watched' | 'pending' | 'review' | 'watchedDate' | 'favorite'
         >[];
 
         return MOVIES.map((movie) => {
@@ -103,7 +104,8 @@ export class MovieService {
                     watched: savedMovie.watched,
                     pending: savedMovie.pending,
                     review: savedMovie.review,
-                    watchedDate: savedMovie.watchedDate
+                    watchedDate: savedMovie.watchedDate,
+                    favorite: savedMovie.favorite
                   }
                 : movie;
         });
@@ -128,6 +130,16 @@ export class MovieService {
                         watchedDate: watchedDate || undefined,
                         watched: Boolean(watchedDate),
                     }
+                    : movie
+            )
+        );
+    }
+
+    toggleFavorite(movieId: number){
+        this.moviesState.update((movies) => 
+            movies.map((movie) => 
+                movie.id === movieId
+                    ? {...movie, favorite: !movie.favorite}
                     : movie
             )
         );

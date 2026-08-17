@@ -9,26 +9,6 @@
   color: #f5f7fb;
 }
 
-.movie-detail__back {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 32px;
-  border: 1px solid #45d483;
-  border-radius: 999px;
-  padding: 10px 16px;
-  color: #45d483;
-  font-weight: 700;
-  text-decoration: none;
-  transition: background 160ms ease, color 160ms ease, transform 160ms ease;
-}
-
-.movie-detail__back:hover {
-  background: #45d483;
-  color: #111318;
-  transform: translateY(-1px);
-}
-
 .movie-detail__layout {
   display: grid;
   grid-template-columns: minmax(220px, 320px) 1fr;
@@ -120,12 +100,12 @@
 }
 
 
-.movie-card__user-rating {
+.movie-detail__user-rating {
   display: grid;
   gap: 8px;
 }
 
-.movie-card__user-rating p {
+.movie-detail__user-rating p {
   margin: 0;
   color: #c8ced8;
   font-size: 14px;
@@ -133,51 +113,10 @@
 }
 
 
-.movie-card__user-choice {
+.movie-detail__user-choice {
   margin: 0;
   color: #45d483;
   font-size: 14px;
-}
-
-
-.movie-detail__watched {
-  width: fit-content;
-  border: 1px solid #344052;
-  border-radius: 999px;
-  padding: 9px 14px;
-  background: transparent;
-  color: #c8ced8;
-  cursor: pointer;
-  font: inherit;
-  font-weight: 700;
-  transition: background 160ms ease, border-color 160ms ease, color 160ms ease;
-}
-
-.movie-detail__watched:hover,
-.movie-detail__watched.is-watched {
-  border-color: #45d483;
-  background: #45d483;
-  color: #111318;
-}
-
-.movie-detail__pending {
-  width: fit-content;
-  border: 1px solid #344052;
-  border-radius: 999px;
-  padding: 9px 14px;
-  background: transparent;
-  color: #c8ced8;
-  cursor: pointer;
-  font: inherit;
-  font-weight: 700;
-  transition: background 160ms ease, border-color 160ms ease, color 160ms ease;
-}
-
-.movie-detail__pending:hover,
-.movie-detail__pending.is-watched {
-  border-color: #45d483;
-  background: #45d483;
-  color: #111318;
 }
 
 .movie-detail__review {
@@ -239,4 +178,36 @@
 .movie-detail__watched-date input:focus {
   border-color: #45d483;
   outline: none;
+}
+.movie-detail__lists {
+  display: grid;
+  gap: 12px;
+  max-width: 520px;
+}
+
+.movie-detail__lists h2 {
+  margin: 0;
+  font-size: 22px;
+}
+
+.movie-detail__list-options {
+  display: grid;
+  gap: 8px;
+}
+
+.movie-detail__list-options label {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  border: 1px solid #2d3440;
+  border-radius: 8px;
+  padding: 10px 12px;
+  background: #181c24;
+  color: #c8ced8;
+  cursor: pointer;
+  font-weight: 700;
+}
+
+.movie-detail__list-options input {
+  accent-color: #45d483;
 }

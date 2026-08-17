@@ -3,7 +3,7 @@ import { MovieService } from '../../../../core/services/movie.service';
 import { MovieCard } from '../../components/movie-card/movie-card';
 import { RouterLink } from '@angular/router';
 
-type WatchFilter = 'all' | 'watched' | 'pending' | 'Not watched';
+type WatchFilter = 'all' | 'watched' | 'pending' | 'not-watched' | 'favorite';
 type SortBy = 'title' | 'year' | 'average-rating' | 'most-voted' | 'user-rating';
 
 @Component({
@@ -38,7 +38,8 @@ export class MovieCatalog {
         filter === 'all' ||
         (filter === 'watched' && movie.watched) ||
         (filter === 'pending' && movie.pending) ||
-        (filter === 'Not watched' && !movie.watched);
+        (filter === 'favorite' && movie.favorite) ||
+        (filter === 'not-watched' && !movie.watched);
           
       const matchesGenre =
         selectedGenre === 'all' ||
@@ -88,6 +89,10 @@ export class MovieCatalog {
     this.movieService.togglePending(movieId);
   }
 
+  protected toggleFavorite(movieId: number): void{
+    this.movieService.toggleFavorite(movieId);
+  }
+
   protected updateWatchFilter(filter: WatchFilter): void{
     this.watchFilter.set(filter);
   }
@@ -100,7 +105,8 @@ export class MovieCatalog {
       watched: movies.filter((movie) => movie.watched).length,
       notWatched: movies.filter((movie) => !movie.watched).length,
       pending: movies.filter((movie) => movie.pending).length,
-      rated: movies.filter((movie) => movie.userRating != undefined).length
+      rated: movies.filter((movie) => movie.userRating != undefined).length,
+      favorite: movies.filter((movie) => movie.favorite).length
     };
   });
 

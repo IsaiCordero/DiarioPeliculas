@@ -17,23 +17,14 @@
             </p>
         </div>
 
-        <button
-            class="movie-card__watched"
-            type="button"
-            [class.is-watched]="movie().watched"
-            (click)="watchedToggled.emit()"
-        >
-            {{movie().watched ? 'Vista' : 'Marcar como vista'}}
-        </button>
-
-        <button
-            class="movie-card__pending"
-            type="button"
-            [class.is-watched] = "movie().pending"
-            (click)="pendingToggled.emit()"
-        >
-            {{ movie().pending ? 'Pendiente' : 'Marcar como pendiente' }}
-        </button>
+        <app-movie-status-actions
+            [watched]="movie().watched"
+            [pending]="movie().pending"
+            [favorite]="movie().favorite"
+            (watchedToggled)="watchedToggled.emit()"
+            (pendingToggled)="pendingToggled.emit()"
+            (favoriteToggled)="favoriteToggled.emit()"
+        />
 
         <p class="movie-card__synopsis">{{ movie().synopsis }}</p>
 

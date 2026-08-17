@@ -37,8 +37,8 @@
 
             <button
                 type="button"
-                [class.is-active] = "watchFilter() === 'Not watched'"
-                (click)="updateWatchFilter('Not watched')"
+                [class.is-active] = "watchFilter() === 'not-watched'"
+                (click)="updateWatchFilter('not-watched')"
             >
                 No vistas ({{moviesStats().notWatched}})
             </button>
@@ -49,6 +49,14 @@
                 (click)="updateWatchFilter('pending')"
             >
                 Pendientes ({{moviesStats().pending}})
+            </button>
+
+            <button
+                type="button"
+                [class.is-active]="watchFilter() === 'favorite'"
+                (click)="updateWatchFilter('favorite')"
+            >
+                Favoritas ({{moviesStats().favorite}})
             </button>
         </div>
 
@@ -116,6 +124,7 @@
             (ratingSelected)="rateMovie(movie.id, $event)"
             (watchedToggled)="toggleWatched(movie.id)"
             (pendingToggled)="togglePending(movie.id)"
+            (favoriteToggled)="toggleFavorite(movie.id)"
             />
         } @empty {
             <p class="catalog__empty"> No hay películas que coincidan con la búsqueda.</p>
