@@ -4,6 +4,7 @@ import { MovieDetail } from './features/movies/pages/movie-detail/movie-detail';
 import { MovieDiary } from './features/movies/pages/movie-diary/movie-diary';
 import { MovieStats } from './features/movies/pages/movie-stats/movie-stats';
 import { MovieLists } from './features/movies/pages/movie-lists/movie-lists';
+import { MovieListDetail } from './features/movies/pages/movie-list-detail/movie-list-detail';
 
 export const routes: Routes = [
     {
@@ -21,6 +22,10 @@ export const routes: Routes = [
     {
         path: 'movies/lists',
         component: MovieLists
+    },
+    {
+        path: 'movies/lists/:id',
+        component: MovieListDetail
     },
     {
         path: 'movies/:id',

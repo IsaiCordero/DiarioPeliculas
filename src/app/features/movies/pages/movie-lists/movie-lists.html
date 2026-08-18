@@ -40,6 +40,7 @@
                         }
 
                         <span>{{ list.movieIds.length }} películas</span>
+                        
                     </div>
 
                     @if (list.movieIds.length > 0){
@@ -53,6 +54,9 @@
                     <button type="button" (click)="deleteList(list.id)">
                         Borrar
                     </button>
+                    <a [routerLink]="['/movies/lists', list.id]">
+                            Ver lista
+                    </a>
                 </article>
             }
         </div>

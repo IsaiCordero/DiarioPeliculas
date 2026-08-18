@@ -1,0 +1,48 @@
+<section class="movie-list-detail">
+    @if (list(); as selectedList){
+        <header class="movie-list-detail__header">
+            <p>Lista personal</p>
+            <h1>{{ selectedList.name }}</h1>
+
+            @if (selectedList.description){
+                <span>{{ selectedList.description }}</span>
+            }
+        </header>
+
+        @if (moviesInList().length > 0){
+            <div class="movie-list-detail__grid">
+                @for (movie of moviesInList(); track movie.id){
+                    <article class="movie-list-detail__movie">
+                        <img [src]="movie.posterUrl" [alt]="movie.title"/>
+
+                        <div>
+                            <h2>
+                                <a [routerLink]="['/movies', movie.id]">
+                                    {{ movie.title }}
+                                </a>
+                            </h2>
+
+                            <p>{{ movie.year }} - {{ movie.director }}</p>
+
+                            @if (movie.userRating) {
+                                <strong>{{ movie.userRating }}/5</strong>
+                            }
+
+                            <button type="button" (click)="removeMovie(movie.id)">
+                                Quitar de la lista
+                            </button>
+                        </div>
+                    </article>
+                }
+            </div>
+        } @else {
+            <p class="movie-list-detail__empty">
+                Esta lsita todavía no tiene películas.
+            </p>
+        }
+    } @else {
+        <p class="movie-list-detail__empty">
+            No hemos encontrado esta lista.
+        </p>
+    }
+</section>

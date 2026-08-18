@@ -72,7 +72,8 @@
 }
 
 .movie-lists__form button,
-.movie-lists__card button {
+.movie-lists__card button,
+.movie-lists__card a {
   width: fit-content;
   border: 1px solid #45d483;
   border-radius: 999px;
@@ -85,9 +86,14 @@
 }
 
 .movie-lists__form button:hover,
-.movie-lists__card button:hover {
+.movie-lists__card button:hover,
+.movie-lists__card a:hover {
   background: #45d483;
   color: #111318;
+}
+
+.movie-lists__card a {
+  text-decoration: none;
 }
 
 .movie-lists__grid {
