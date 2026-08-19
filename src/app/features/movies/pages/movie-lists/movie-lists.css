@@ -144,3 +144,49 @@
     font-size: 36px;
   }
 }
+
+.movie-lists__edit-form {
+  display: grid;
+  gap: 12px;
+}
+
+.movie-lists__edit-form label {
+  display: grid;
+  gap: 8px;
+  color: #c8ced8;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.movie-lists__edit-form input,
+.movie-lists__edit-form textarea {
+  border: 1px solid #2d3440;
+  border-radius: 8px;
+  padding: 10px 12px;
+  background: #191d25;
+  color: #f5f7fb;
+  font: inherit;
+}
+
+.movie-lists__edit-form textarea {
+  resize: vertical;
+}
+
+.movie-lists__edit-form input:focus,
+.movie-lists__edit-form textarea:focus {
+  border-color: #45d483;
+  outline: none;
+}
+
+.movie-lists__edit-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.movie-lists__card-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+  margin-top: 4px;
+}

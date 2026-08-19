@@ -1,6 +1,10 @@
 <section class="movie-list-detail">
     @if (list(); as selectedList){
         <header class="movie-list-detail__header">
+            
+            <a class="movie-list-detail__back" [routerLink]="['/movies/lists']">
+                Volver
+            </a>
             <p>Lista personal</p>
             <h1>{{ selectedList.name }}</h1>
 
@@ -31,13 +35,14 @@
                             <button type="button" (click)="removeMovie(movie.id)">
                                 Quitar de la lista
                             </button>
+                            
                         </div>
                     </article>
                 }
             </div>
         } @else {
             <p class="movie-list-detail__empty">
-                Esta lsita todavía no tiene películas.
+                Esta lista todavía no tiene películas.
             </p>
         }
     } @else {

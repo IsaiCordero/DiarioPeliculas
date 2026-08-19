@@ -42,6 +42,28 @@ export class MovieListService {
     );
   }
 
+  updateList(listId: number, name: string, description?: string): void {
+    const trimmedName = name.trim();
+    const trimmedDescription = description?.trim();
+
+    if(!trimmedName){
+      return;
+    }
+
+    this.listsState.update((lists) =>
+      lists.map((list) => 
+        list.id === listId
+          ? {
+            ...list,
+            name: trimmedName,
+            description: trimmedDescription || undefined,
+          }
+          : list
+      )
+    );
+  }
+
+
   toggleMovieInList(listId: number, movieId: number): void{
     this.listsState.update((lists) =>
       lists.map((list) => {

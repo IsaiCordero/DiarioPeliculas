@@ -16,8 +16,12 @@ export class MovieLists {
   protected readonly lists = this.movieListService.lists;
   protected readonly movies = this.movieService.movies;
 
+  protected readonly editingListId = signal<number | null>(null);
+
   protected readonly listName = signal('');
   protected readonly listDescription = signal('');
+  protected readonly editName = signal('');
+  protected readonly editDescription = signal('');
 
   protected createList(): void {
     this.movieListService.createList(this.listName(), this.listDescription());
@@ -31,5 +35,33 @@ export class MovieLists {
 
   protected getMovieTitle(movieId: number): string {
     return this.movies().find((movie) => movie.id === movieId)?.title ?? 'Película desconocida';
+  }
+
+  protected startEditing(listId: number, name: string, description?: string): void {
+    this.editingListId.set(listId);
+    this.editName.set(name);
+    this.editDescription.set(description ?? '');
+  }
+
+  protected cancelEditing(): void {
+    this.editingListId.set(null);
+    this.editName.set('');
+    this.editDescription.set('');
+  }
+
+  protected saveEditing(): void {
+    const listId = this.editingListId();
+
+    if (listId === null){
+      return;
+    }
+
+    this.movieListService.updateList(
+      listId,
+      this.editName(),
+      this.editDescription()
+    );
+
+    this.cancelEditing();
   }
 }

@@ -32,16 +32,42 @@
         <div class="movie-lists__grid">
             @for (list of lists(); track list.id){
                 <article class="movie-lists__card">
-                    <div>
-                        <h2>{{ list.name }}</h2>
+                    @if (editingListId() === list.id){
+                        <form class="movie-lists__edit-form" (submit)="$event.preventDefault(); saveEditing()">
+                            <label>
+                                Nombre
+                                <input 
+                                    type="text"
+                                    [value]="editName()"
+                                    (input)="editName.set($any($event.target).value)"
+                                />
+                            </label>
 
-                        @if (list.description){
-                            <p>{{ list.description }}</p>
-                        }
+                            <label>
+                                Descripción
+                                <textarea 
+                                    rows="3"
+                                    [value]="editDescription()"
+                                    (input)="editDescription.set($any($event.target).value)"
+                                ></textarea>
+                            </label>
 
-                        <span>{{ list.movieIds.length }} películas</span>
-                        
-                    </div>
+                            <div class="movie-lists__edit-actions">
+                                <button type="submit">Guardar</button>
+                                <button type="button" (click)="cancelEditing()">Cancelar</button>
+                            </div>
+                        </form>
+                    } @else {
+                        <div>
+                            <h2>{{ list.name }}</h2>
+
+                            @if (list.description) {
+                                <p>{{ list.description }}</p>
+                            }
+
+                            <span>{{ list.movieIds.length }} películas</span>
+                        </div>
+                    }
 
                     @if (list.movieIds.length > 0){
                         <ul>
@@ -51,12 +77,22 @@
                         </ul>
                     }
 
-                    <button type="button" (click)="deleteList(list.id)">
-                        Borrar
-                    </button>
-                    <a [routerLink]="['/movies/lists', list.id]">
-                            Ver lista
-                    </a>
+                    <div class="movie-lists__card-actions">
+                        <a [routerLink]="['/movies/lists', list.id]">
+                                Ver lista
+                        </a>
+                        
+                        <button type="button" (click)="deleteList(list.id)">
+                            Borrar
+                        </button>
+    
+                        <button
+                            type="button"
+                            (click)="startEditing(list.id, list.name, list.description)"
+                        >
+                            Editar
+                        </button>
+                    </div>
                 </article>
             }
         </div>
