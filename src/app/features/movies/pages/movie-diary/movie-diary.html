@@ -4,43 +4,49 @@
         <h1>Mis visionados</h1>
     </header>
 
-    @if (diaryMovies().length > 0) {
-        <div class="movie-diary__list">
-            @for (movie of diaryMovies(); track movie.id) {
-                <article class="movie-diary__entry">
-                    <time [attr.datetime]="movie.watchedDate">
-                        {{movie.watchedDate}}
-                    </time>
+    @if(diaryGroups().length > 0){
+        <div class="movie-diary__groups">
+            @for (group of diaryGroups(); track group.monthKey) {
+                <section class="movie-diary__group">
+                    <h2>{{group.label}}</h2>
 
-                    <div class="movie-diary__content">
-                        <h2>
-                            <a [routerLink]="['/movies', movie.id]">
-                                {{movie.title}}
-                            </a>
-                        </h2>
+                    <div class="movie-diary__list">
+                        @for (movie of group.movies; track movie.id) {
+                            <article class="movie-diary__entry">
+                                <time [attr.datetime]="movie.watchedDate">
+                                    {{ movie.watchedDate }}
+                                </time>
 
-                        <p>
-                            {{movie.year}} · {{movie.director}}
-                        </p>
+                                <div class="movie-diary__content">
+                                    <h3>
+                                        <a [routerLink]="['/movies', movie.id]">
+                                            {{movie.title}}
+                                        </a>
+                                    </h3>
 
-                        @if (movie.userRating){
-                            <strong>{{movie.userRating}}/5</strong>
-                        } @else{
-                            <span>Sin puntuación</span>
-                        }
+                                    <p>{{movie.year}} -  {{movie.director}}</p>
 
-                        @if (movie.review) {
-                            <blockquote>
-                                {{movie.review}}
-                            </blockquote>
+                                    @if (movie.userRating){
+                                        <strong>{{ movie.userRating }}/5</strong>
+                                    } @else {
+                                        <span>Sin puntuación</span>
+                                    }
+
+                                    @if (movie.review) {
+                                        <blockquote>
+                                            {{movie.review}}
+                                        </blockquote>
+                                    }
+                                </div>
+                            </article>
                         }
                     </div>
-                </article>
+                </section>
             }
         </div>
     } @else {
         <p class="movie-diary__empty">
-            Todavia no has registrado ningún visionado.
+            Todavía no se ha registrado ningún visionado.
         </p>
     }
 </section>

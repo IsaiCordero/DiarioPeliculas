@@ -92,4 +92,24 @@ export class MovieListService {
 
     return JSON.parse(rawState) as MovieList[];
   }
+
+  reorderMovies(listId: number, previousIndex : number, currentIndex: number): void {
+    this.listsState.update((lists) => 
+      lists.map((list) => {
+        if (list.id !== listId) {
+          return list;
+        }
+
+        const movieIds = [...list.movieIds];
+        const [movedMovieId] = movieIds.splice(previousIndex, 1);
+        
+        movieIds.splice(currentIndex, 0, movedMovieId);
+
+        return {
+          ...list,
+          movieIds
+        };
+      })
+    );
+  }
 }

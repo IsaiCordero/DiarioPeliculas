@@ -2,10 +2,11 @@ import { Component, computed, inject } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { MovieListService } from '../../../../core/services/movie-list';
 import { MovieService } from '../../../../core/services/movie.service';
+import { CdkDrag, CdkDragDrop, CdkDropList } from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'app-movie-list-detail',
-  imports: [RouterLink],
+  imports: [RouterLink, CdkDropList, CdkDrag],
   templateUrl: './movie-list-detail.html',
   styleUrl: './movie-list-detail.css',
 })
@@ -27,12 +28,22 @@ export class MovieListDetail {
       return [];
     }
 
-    return this.movieService.movies().filter((movie) => 
-      selectedList.movieIds.includes(movie.id)
-    );
+    return selectedList.movieIds
+      .map((movieId) =>
+        this.movieService.movies().find((movie) => movie.id === movieId)
+      )
+      .filter((movie) => movie !== undefined);
   });
 
   protected removeMovie(movieId: number): void {
     this.movieListService.toggleMovieInList(this.listId, movieId);
+  }
+
+  protected dropMovie(event: CdkDragDrop<unknown>): void {
+    this.movieListService.reorderMovies(
+      this.listId,
+      event.previousIndex,
+      event.currentIndex
+    );
   }
 }

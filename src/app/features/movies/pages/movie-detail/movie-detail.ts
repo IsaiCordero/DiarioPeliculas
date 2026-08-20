@@ -7,7 +7,7 @@ import { MovieListService } from '../../../../core/services/movie-list';
 
 @Component({
   selector: 'app-movie-detail',
-  imports: [RouterLink, RatingSelector, MovieStatusActions],
+  imports: [RatingSelector, MovieStatusActions],
   templateUrl: './movie-detail.html',
   styleUrl: './movie-detail.css',
 })
@@ -56,4 +56,6 @@ export class MovieDetail {
   protected toggleMovieInList(listId: number): void{
     this.movieListService.toggleMovieInList(listId, this.movieId);
   }
+
+  
 }

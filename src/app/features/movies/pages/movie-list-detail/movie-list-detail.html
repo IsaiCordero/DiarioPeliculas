@@ -14,9 +14,9 @@
         </header>
 
         @if (moviesInList().length > 0){
-            <div class="movie-list-detail__grid">
+            <div class="movie-list-detail__grid" cdkDropList (cdkDropListDropped)="dropMovie($event)">
                 @for (movie of moviesInList(); track movie.id){
-                    <article class="movie-list-detail__movie">
+                    <article class="movie-list-detail__movie" cdkDrag>
                         <img [src]="movie.posterUrl" [alt]="movie.title"/>
 
                         <div>

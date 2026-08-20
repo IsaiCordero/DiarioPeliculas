@@ -145,3 +145,31 @@
   color: #111318;
   transform: translateY(-1px);
 }
+
+.movie-list-detail__movie {
+  cursor: grab;
+}
+
+.movie-list-detail__movie:active {
+  cursor: grabbing;
+}
+
+.cdk-drag-preview {
+  box-sizing: border-box;
+  border-radius: 8px;
+  background: #181c24;
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.35);
+}
+
+.cdk-drag-placeholder {
+  opacity: 0.35;
+}
+
+.cdk-drag-animating {
+  transition: transform 180ms ease;
+}
+
+.movie-list-detail__grid.cdk-drop-list-dragging
+  .movie-list-detail__movie:not(.cdk-drag-placeholder) {
+  transition: transform 180ms ease;
+}

@@ -74,17 +74,17 @@
   gap: 8px;
 }
 
-.movie-diary__content h2 {
+.movie-diary__content h3 {
   margin: 0;
   font-size: 24px;
 }
 
-.movie-diary__content h2 a {
+.movie-diary__content h3 a {
   color: inherit;
   text-decoration: none;
 }
 
-.movie-diary__content h2 a:hover {
+.movie-diary__content h3 a:hover {
   color: #45d483;
 }
 
@@ -124,4 +124,22 @@
   .movie-diary__header h1 {
     font-size: 36px;
   }
+}
+.movie-diary__groups {
+  display: grid;
+  gap: 28px;
+  max-width: 920px;
+  margin: 0 auto;
+}
+
+.movie-diary__group {
+  display: grid;
+  gap: 14px;
+}
+
+.movie-diary__group h2 {
+  margin: 0;
+  color: #45d483;
+  font-size: 24px;
+  text-transform: capitalize;
 }
