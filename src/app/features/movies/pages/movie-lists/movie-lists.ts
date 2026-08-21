@@ -1,4 +1,4 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, computed, inject, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { MovieListService } from '../../../../core/services/movie-list';
 import { MovieService } from '../../../../core/services/movie.service';
@@ -22,6 +22,7 @@ export class MovieLists {
   protected readonly listDescription = signal('');
   protected readonly editName = signal('');
   protected readonly editDescription = signal('');
+  protected readonly searchTerm = signal('');
 
   protected createList(): void {
     this.movieListService.createList(this.listName(), this.listDescription());
@@ -64,4 +65,17 @@ export class MovieLists {
 
     this.cancelEditing();
   }
+
+  protected readonly filteredLists = computed(() => {
+    const term = this.searchTerm().toLowerCase().trim();
+
+    if(!term) {
+      return this.lists();
+    }
+
+    return this.lists().filter((list) =>
+      list.name.toLowerCase().includes(term) ||
+      list.description?.toLowerCase().includes(term)
+    );
+  });
 }

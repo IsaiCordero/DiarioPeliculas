@@ -190,3 +190,26 @@
   align-items: center;
   margin-top: 4px;
 }
+.movie-lists__search {
+  display: grid;
+  gap: 8px;
+  max-width: 980px;
+  margin: 18px auto 0;
+  color: #c8ced8;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.movie-lists__search input {
+  border: 1px solid #2d3440;
+  border-radius: 8px;
+  padding: 11px 13px;
+  background: #191d25;
+  color: #f5f7fb;
+  font: inherit;
+}
+
+.movie-lists__search input:focus {
+  border-color: #45d483;
+  outline: none;
+}

@@ -22,15 +22,24 @@
                 placeholder="Describe esta lista"
                 [value]="listDescription()"
                 (input)="listDescription.set($any($event.target).value)"
-            ></textarea>
+                ></textarea>
+            </label>
+            
+            <button type="submit">Crear lista</button>
+        </form>
+        
+        <label class="movie-lists__search">
+            Buscar lista
+            <input type="search"
+                placeholder="Nombre o descripción"
+                [value]="searchTerm()"
+                (input)="searchTerm.set($any($event.target).value)"
+                />
         </label>
 
-        <button type="submit">Crear lista</button>
-    </form>
-
-    @if (lists().length > 0){
+    @if (filteredLists().length > 0){
         <div class="movie-lists__grid">
-            @for (list of lists(); track list.id){
+            @for (list of filteredLists(); track list.id){
                 <article class="movie-lists__card">
                     @if (editingListId() === list.id){
                         <form class="movie-lists__edit-form" (submit)="$event.preventDefault(); saveEditing()">
