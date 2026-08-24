@@ -11,8 +11,14 @@
                 type="text"
                 placeholder="EJ. Top ciencia ficción"
                 [value]="listName()"
-                (input)="listName.set($any($event.target).value)"
+                (input)="updateListName($any($event.target).value)"
             />
+
+            @if (listNameError()) {
+                <span class="movie-lists__field-error">
+                    {{ listNameError() }}
+                </span>
+            }
         </label>
 
         <label>
@@ -48,8 +54,14 @@
                                 <input 
                                     type="text"
                                     [value]="editName()"
-                                    (input)="editName.set($any($event.target).value)"
+                                    (input)="updateEditName($any($event.target).value)"
                                 />
+
+                                @if(editNameError()){
+                                    <span class="movie-lists__field-error">
+                                        {{ editNameError() }}
+                                    </span>
+                                }
                             </label>
 
                             <label>
@@ -107,7 +119,11 @@
         </div>
     } @else{
         <p class="movie-lists__empty">
-            Todavía no has creado ninguna lista.
+            {{
+                lists().length === 0
+                    ? 'Todavía no has creado ninguna lista.'
+                    : 'No hay listas que coincidan con la búsqueda.'
+            }}
         </p>
     }
 </section>

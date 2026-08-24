@@ -213,3 +213,10 @@
   border-color: #45d483;
   outline: none;
 }
+
+.movie-lists__form .movie-lists__field-error,
+.movie-lists__edit-form .movie-lists__field-error {
+  color: #ff6b6b;
+  font-size: 13px;
+  font-weight: 700;
+}

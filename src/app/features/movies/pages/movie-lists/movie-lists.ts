@@ -23,11 +23,21 @@ export class MovieLists {
   protected readonly editName = signal('');
   protected readonly editDescription = signal('');
   protected readonly searchTerm = signal('');
+  protected readonly listNameError = signal('');
+  protected readonly editNameError = signal('');
 
   protected createList(): void {
-    this.movieListService.createList(this.listName(), this.listDescription());
+    const name = this.listName().trim();
+
+    if(!name){
+      this.listNameError.set('El nombre de la lista es obligatorio');
+      return;
+    }
+
+    this.movieListService.createList(name, this.listDescription());
     this.listName.set('');
     this.listDescription.set('');
+    this.listNameError.set('');
   }
 
   protected deleteList(listId: number): void{
@@ -42,24 +52,32 @@ export class MovieLists {
     this.editingListId.set(listId);
     this.editName.set(name);
     this.editDescription.set(description ?? '');
+    this.editNameError.set('');
   }
 
   protected cancelEditing(): void {
     this.editingListId.set(null);
     this.editName.set('');
     this.editDescription.set('');
+    this.editNameError.set('');
   }
 
   protected saveEditing(): void {
     const listId = this.editingListId();
+    const name = this.editName().trim();
 
     if (listId === null){
       return;
     }
 
+    if(!name){
+      this.editNameError.set('El nombre de la lista es obligatorio');
+      return;
+    }
+
     this.movieListService.updateList(
       listId,
-      this.editName(),
+      name,
       this.editDescription()
     );
 
@@ -78,4 +96,20 @@ export class MovieLists {
       list.description?.toLowerCase().includes(term)
     );
   });
+
+  protected updateListName(value: string): void{
+    this.listName.set(value);
+
+    if(this.listNameError()){
+      this.listNameError.set('');
+    }
+  }
+
+  protected updateEditName(value: string): void {
+    this.editName.set('');
+
+    if(this.editNameError()){
+      this.editNameError.set('');
+    }
+  }
 }
