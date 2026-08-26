@@ -144,6 +144,9 @@ export class MovieService {
             )
         );
     }
-}
 
-//Esto leerá un Mock pero si añado una API se muede modificar facilmente
+    resetMovieState(): void{
+        localStorage.removeItem(this.storageKey);
+        this.moviesState.set(MOVIES);
+    }
+}

@@ -112,4 +112,9 @@ export class MovieListService {
       })
     );
   }
+
+  resetLists(): void {
+    localStorage.removeItem(this.storageKey);
+    this.listsState.set([]);
+  }
 }

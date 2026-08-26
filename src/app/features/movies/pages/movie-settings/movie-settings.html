@@ -1,0 +1,35 @@
+<section class="movie-settings">
+    <header class="movie-settings__header">
+        <p>Ajustes</p>
+        <h1>Datos guardados</h1>
+    </header>
+
+    <section class="movie-settings__danger">
+        <div>
+            <h2>Borrar datos personales</h2>
+            <p>
+                Elimina puntuaciones, vistas, pendientes, favoritas, reseñas, fechas y listas.
+            </p>
+        </div>
+
+        @if(!isConfirmingReset()) {
+            <button type="button" (click)="askResetConfirmation()">
+                Borrar datos.
+            </button>
+        } @else {
+            <div class="movie-settings__confirm">
+                <p>¿Seguro? Esta acción no se puede deshacer.</p>
+
+                <div>
+                    <button type="button" class="is-danger" (click)="confirmReset()">
+                        Confirmar borrado
+                    </button>
+
+                    <button type="button" (click)="cancelReset()">
+                        Cancelar
+                    </button>
+                </div>
+            </div>
+        }
+    </section>
+</section>
