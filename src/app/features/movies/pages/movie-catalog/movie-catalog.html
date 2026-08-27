@@ -8,6 +8,7 @@
             </p>
         </div>
 
+        <div class="catalog__controls">
         <label class="catalog__search">
             <span>Buscar</span>
             <input
@@ -76,6 +77,21 @@
             </select>
         </div>
 
+        <div class="catalog__decade-filter">
+            <label for="decade-filter"> Decada </label>
+
+            <select id="decade-filter"
+                [value]="selectedDecade()"
+                (change)="updateSelectedDecade($any($event.target).value)"
+            >
+                @for(decade of availableDecades(); track decade) {
+                    <option [value]="decade">
+                        {{ decade === 'all' ? 'Todas las decadas' : decade + 's' }}
+                    </option>
+                }
+            </select>
+        </div>
+
         <div class="catalog__sort">
             <label for="sort-by">Ordenar por</label>
 
@@ -90,6 +106,16 @@
                 <option value="most-voted">Mas votadas</option>
                 <option value="user-rating">Mi puntuación</option>
             </select>
+        </div>
+
+        <button
+            class="catalog__clear-filters"
+            type="button"
+            [disabled]="!hasActiveFilters()"
+            (click)="clearFilters()"
+        >
+            Limpiar filtros
+        </button>
         </div>
     </header>
 

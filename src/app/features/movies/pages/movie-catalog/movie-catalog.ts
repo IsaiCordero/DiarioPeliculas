@@ -19,6 +19,8 @@ export class MovieCatalog {
   protected readonly watchFilter = signal<WatchFilter>('all');
   protected readonly selectedGenre = signal('all');
   protected readonly sortBy = signal<SortBy>('title');
+  protected readonly selectedDecade = signal('all');
+
   protected readonly movies = this.movieService.movies;
 
   protected readonly filteredMovies = computed(() => {
@@ -26,6 +28,7 @@ export class MovieCatalog {
     const filter = this.watchFilter();
     const selectedGenre = this.selectedGenre();
     const sortBy = this.sortBy();
+    const selectedDecade = this.selectedDecade();
 
     const filtered =  this.movies().filter((movie) => {
       const matchesSearch =
@@ -40,12 +43,18 @@ export class MovieCatalog {
         (filter === 'pending' && movie.pending) ||
         (filter === 'favorite' && movie.favorite) ||
         (filter === 'not-watched' && !movie.watched);
+
+      const movieDecade = Math.floor(movie.year / 10) * 10;
+
+      const matchesDecade =
+        selectedDecade === 'all' ||
+        String(movieDecade) == selectedDecade;
           
       const matchesGenre =
         selectedGenre === 'all' ||
         movie.genres.includes(selectedGenre);
 
-        return matchesSearch && matchesWatchFilter && matchesGenre;
+        return matchesSearch && matchesWatchFilter && matchesGenre && matchesDecade;
     });
 
     return [...filtered].sort((a,b) => {
@@ -72,6 +81,22 @@ export class MovieCatalog {
       return 0;
     });
   });
+
+  protected readonly hasActiveFilters = computed(() =>
+    this.searchTerm().trim() !== '' ||
+    this.watchFilter() !== 'all' ||
+    this.selectedGenre() !== 'all' ||
+    this.selectedDecade() !== 'all' ||
+    this.sortBy() !== 'title' 
+  );
+
+  protected clearFilters(): void {
+    this.searchTerm.set('');
+    this.watchFilter.set('all');
+    this.selectedGenre.set('all');
+    this.selectedDecade.set('all');
+    this.sortBy.set('title');
+  }
 
   protected updateSearchTerm(value: string): void {
     this.searchTerm.set(value);
@@ -127,4 +152,14 @@ export class MovieCatalog {
   protected readonly reviewedMovies = computed(() => 
   this.movies().filter((movie) => movie.review?.trim())
   );
+
+  protected readonly availableDecades = computed(() => {
+    const decades = this.movies().map((movie) => Math.floor(movie.year / 10) * 10);
+
+    return ['all', ...new Set(decades)];
+  });
+
+  protected updateSelectedDecade(decade: string): void {
+    this.selectedDecade.set(decade);
+  }
 }
