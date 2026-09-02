@@ -162,4 +162,13 @@ export class MovieCatalog {
   protected updateSelectedDecade(decade: string): void {
     this.selectedDecade.set(decade);
   }
+
+  protected readonly resultsSummary = computed(() =>{
+    const visible = this.filteredMovies().length;
+    const total = this.movies().length;
+
+    return this.hasActiveFilters()
+      ? `Mostrando ${visible} de ${total} películas con filtros aplicados`
+      : `Mostrando ${visible} de ${total} películas`;
+  });
 }

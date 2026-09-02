@@ -1,0 +1,14 @@
+<div class="movie-badges">
+    @if(watched()){
+        <span>Vista</span>
+    }
+    @if(pending()){
+        <span>Pendiente</span>
+    }
+    @if(favorite()){
+        <span>Favorita</span>
+    }
+    @if(userRating()){
+        <span>{{userRating()}}/5</span>
+    }
+</div>

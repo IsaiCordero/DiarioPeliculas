@@ -15,6 +15,13 @@
 
                 <h1>{{ selectedMovie.title }}</h1>
 
+                <app-movie-badges
+                    [watched]="selectedMovie.watched"
+                    [pending]="selectedMovie.pending"
+                    [favorite]="selectedMovie.favorite"
+                    [userRating]="selectedMovie.userRating"
+                />
+
                 @if (selectedMovie.originalTitle){
                     <p class="movie-detail__original-title">
                         Titulo original: {{ selectedMovie.originalTitle }}

@@ -143,6 +143,10 @@
         </section>
     }
 
+    <p class="catalog__results-summary">
+        {{ resultsSummary() }}
+    </p>
+
     <div class="catalog__grid">
         @for (movie of filteredMovies(); track movie.id) {
             <app-movie-card 
@@ -153,7 +157,15 @@
             (favoriteToggled)="toggleFavorite(movie.id)"
             />
         } @empty {
-            <p class="catalog__empty"> No hay películas que coincidan con la búsqueda.</p>
+            <div class="catalog__empty"> 
+                <p>No hay películas que coincidan con la búsqueda.</p>
+
+                @if (hasActiveFilters()){
+                    <button type="button" (click)="clearFilters()">
+                        Limpiar filtros
+                    </button>
+                }
+            </div>
         }
     </div>
 </section>

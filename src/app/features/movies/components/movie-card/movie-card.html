@@ -17,6 +17,13 @@
             </p>
         </div>
 
+        <app-movie-badges
+            [watched]="movie().watched"
+            [pending]="movie().pending"
+            [favorite]="movie().favorite"
+            [userRating]="movie().userRating"
+        />
+
         <app-movie-status-actions
             [watched]="movie().watched"
             [pending]="movie().pending"

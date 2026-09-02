@@ -10,5 +10,15 @@ export class RatingSelector {
   readonly value = input<number | undefined>();
   readonly valueSelected = output<number>();
 
-  protected readonly ratings = [1, 2, 3, 4, 5];
+  protected readonly stars = [1, 2, 3, 4, 5];
+
+  protected isFullStar(star: number): boolean{
+    return (this.value() ?? 0) >= star;
+  }
+
+  protected isHalfStar(star:number): boolean{
+    const value = this.value() ?? 0;
+
+    return value >= star - 0.5 && value < star;
+  }
 }

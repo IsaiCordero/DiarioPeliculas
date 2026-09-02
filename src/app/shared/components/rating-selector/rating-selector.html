@@ -1,11 +1,33 @@
 <div class="rating-selector">
-    @for (rating of ratings; track rating){
-        <button
-            type="button"
-            [class.is-selected]="value() === rating"
-            (click)="valueSelected.emit(rating)"
-        >
-            {{ rating }}
-        </button>
+    <div class="rating-selector__stars">
+        @for(star of stars; track star){
+            <span
+                class="rating-selector__star"
+                [class.is-full]="isFullStar(star)"
+                [class.is-half]="isHalfStar(star)"
+            >
+                <button
+                    class="rating-selector__half rating-selector__half--left"
+                    type="button"
+                    (click)="valueSelected.emit(star - 0.5)"
+                    [attr.aria-label]="'Puntuar con' + (star - 0.5) + ' de 5'"
+                ></button>
+
+                <button
+                    class="rating-selector__half rating-selector__half--right"
+                    type="button"
+                    (click)="valueSelected.emit(star)"
+                    [attr.aria-label]="'Puntuar con' + star + ' de 5'"
+                ></button>
+
+                
+                <span class="rating-selector__star-empty">★</span>
+                <span class="rating-selector__star-fill">★</span>
+            </span>
+        }
+    </div>
+
+    @if(value()){
+        <p class="rating-selector__value">{{value()}}/5</p>
     }
 </div>

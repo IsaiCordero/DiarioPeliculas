@@ -4,10 +4,11 @@ import { MovieService } from '../../../../core/services/movie.service';
 import { RatingSelector } from '../../../../shared/components/rating-selector/rating-selector';
 import { MovieStatusActions } from '../../../../shared/components/movie-status-actions/movie-status-actions';
 import { MovieListService } from '../../../../core/services/movie-list';
+import { MovieBadges } from '../../../../shared/components/movie-badges/movie-badges';
 
 @Component({
   selector: 'app-movie-detail',
-  imports: [RatingSelector, MovieStatusActions],
+  imports: [RatingSelector, MovieStatusActions, MovieBadges],
   templateUrl: './movie-detail.html',
   styleUrl: './movie-detail.css',
 })
