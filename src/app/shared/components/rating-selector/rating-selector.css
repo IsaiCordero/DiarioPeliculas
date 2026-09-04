@@ -74,3 +74,19 @@
   font-size: 13px;
   font-weight: 800;
 }
+
+.rating-selector__clear {
+  width: fit-content;
+  border: 1px solid #45d483;
+  border-radius: 999px;
+  padding: 6px 10px;
+  background: transparent;
+  color: #45d483;
+  font-size: 12px;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.rating-selector__clear:hover {
+  background: rgba(69, 212, 131, 0.12);
+}

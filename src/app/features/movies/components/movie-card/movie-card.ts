@@ -13,7 +13,7 @@ import { MovieBadges } from '../../../../shared/components/movie-badges/movie-ba
 })
 export class MovieCard {
   readonly movie = input.required<Movie>();
-  readonly ratingSelected = output<number>();
+  readonly ratingSelected = output<number | undefined>();
   readonly watchedToggled = output<void>();
   readonly pendingToggled = output<void>();
   readonly favoriteToggled = output<void>();

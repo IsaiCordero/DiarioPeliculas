@@ -41,13 +41,23 @@ export class MovieService {
         return this.moviesState().find((movie) => movie.id === id);
     }
 
-    rateMovie(movieId: number, rating: number): void{
+    rateMovie(movieId: number, rating: number | undefined): void{
         this.moviesState.update((movies) =>
-            movies.map((movie) =>
-                movie.id == movieId
-                    ? { ...movie, userRating: rating}
-                    : movie
-            )
+            movies.map((movie) => {
+                if(movie.id !== movieId){
+                    return movie;
+                }
+
+                if(rating === undefined){
+                    const { userRating, ...movieWithoutRating } = movie;
+                    return movieWithoutRating;
+                }
+
+                return {
+                    ...movie,
+                    userRating: rating
+                };
+            })
         );
     }
 

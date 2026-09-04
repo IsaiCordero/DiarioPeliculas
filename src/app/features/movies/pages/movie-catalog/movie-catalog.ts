@@ -102,7 +102,7 @@ export class MovieCatalog {
     this.searchTerm.set(value);
   }
 
-  protected rateMovie(movieId: number, rating: number): void {
+  protected rateMovie(movieId: number, rating: number | undefined): void {
     this.movieService.rateMovie(movieId, rating);
   }
 

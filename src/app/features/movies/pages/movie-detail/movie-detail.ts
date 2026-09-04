@@ -24,7 +24,7 @@ export class MovieDetail {
     this.movieService.movies().find((movie) => movie.id === this.movieId)
   );
 
-  protected rateMovie(rating: number): void {
+  protected rateMovie(rating: number | undefined): void {
     this.movieService.rateMovie(this.movieId, rating);
   }
 

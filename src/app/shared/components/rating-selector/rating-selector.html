@@ -1,4 +1,4 @@
-<div class="rating-selector">
+<div class="rating-selector" (mouseleave)="hoverValue.set(undefined)">
     <div class="rating-selector__stars">
         @for(star of stars; track star){
             <span
@@ -9,6 +9,7 @@
                 <button
                     class="rating-selector__half rating-selector__half--left"
                     type="button"
+                    (mouseenter)="hoverValue.set(star - 0.5)"
                     (click)="valueSelected.emit(star - 0.5)"
                     [attr.aria-label]="'Puntuar con' + (star - 0.5) + ' de 5'"
                 ></button>
@@ -16,6 +17,7 @@
                 <button
                     class="rating-selector__half rating-selector__half--right"
                     type="button"
+                    (mouseenter)="hoverValue.set(star)"
                     (click)="valueSelected.emit(star)"
                     [attr.aria-label]="'Puntuar con' + star + ' de 5'"
                 ></button>
@@ -27,7 +29,17 @@
         }
     </div>
 
-    @if(value()){
+    @if(displayValue()){
         <p class="rating-selector__value">{{value()}}/5</p>
+    }
+
+    @if(value()){
+        <button
+            class="rating-selector__clear"
+            type="button"
+            (click)="clearRating()"
+        >
+            Quitar nota
+        </button>
     }
 </div>
