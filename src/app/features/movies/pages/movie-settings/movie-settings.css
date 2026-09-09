@@ -102,3 +102,41 @@
     font-size: 36px;
   }
 }
+
+.movie-settings__backup {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  max-width: 780px;
+  margin: 0 auto 28px;
+}
+
+.movie-settings__backup button {
+  padding: 10px 16px;
+  border: 1px solid #45d483;
+  border-radius: 8px;
+  background: transparent;
+  color: #45d483;
+  font: inherit;
+  cursor: pointer;
+}
+
+.movie-settings__backup button:hover {
+  background: #45d483;
+  color: #111318;
+}
+
+.movie-settings__message {
+  flex-basis: 100%;
+  margin: 4px 0 0;
+  font-weight: 700;
+}
+
+.movie-settings__message.is-success {
+  color: #45d483;
+}
+
+.movie-settings__message.is-error {
+  color: #ff8a8a;
+}

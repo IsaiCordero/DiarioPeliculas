@@ -4,6 +4,32 @@
         <h1>Datos guardados</h1>
     </header>
 
+    <div class="movie-settings__backup">
+        <button type="button" (click)="exportBackup()">
+            Exportar copia de seguridad
+        </button>
+
+        <input 
+            #backupInput
+            type="file"
+            accept="application/json"
+            hidden
+            (change)="importBackup($event)"    
+        />
+
+        <button type="button" (click)="backupInput.click()">
+            Importar copia de seguridad
+        </button>
+
+        @if(importSuccess()) {
+            <p class="movie-settings__message is-success">{{importSuccess()}}</p>
+        }   
+
+        @if(importError()){
+            <p class="movie-settings__message is-error">{{importError()}}</p>
+        }
+    </div>
+
     <section class="movie-settings__danger">
         <div>
             <h2>Borrar datos personales</h2>

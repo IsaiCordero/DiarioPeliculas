@@ -1,6 +1,7 @@
 import { computed, effect, Injectable, signal } from "@angular/core";
 import { MOVIES } from "../data/movies.mock";
 import { Movie } from "../models/movie.model";
+import { MoviePersonalState } from "../models/movie-backup.model";
 
 
 @Injectable({
@@ -158,5 +159,25 @@ export class MovieService {
     resetMovieState(): void{
         localStorage.removeItem(this.storageKey);
         this.moviesState.set(MOVIES);
+    }
+
+    restoreMovieState(savedMovies: MoviePersonalState[]): void{
+        this.moviesState.set(
+            MOVIES.map((movie) => {
+                const savedMovie = savedMovies.find((item) => item.id === movie.id);
+
+                return savedMovie
+                    ? {
+                        ...movie,
+                        userRating: savedMovie.userRating,
+                        watched: savedMovie.watched,
+                        pending: savedMovie.pending,
+                        favorite: savedMovie.favorite,
+                        review: savedMovie.review,
+                        watchedDate: savedMovie.watchedDate
+                    }
+                : movie;
+            })
+        );
     }
 }

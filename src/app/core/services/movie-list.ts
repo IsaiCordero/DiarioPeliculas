@@ -117,4 +117,8 @@ export class MovieListService {
     localStorage.removeItem(this.storageKey);
     this.listsState.set([]);
   }
+
+  restoreLists(lists: MovieList[]): void{
+    this.listsState.set(lists);
+  }
 }
