@@ -1,5 +1,6 @@
 import { computed, effect, Injectable, signal } from '@angular/core';
 import { MovieList } from '../models/movie-list.model';
+import { isMovieList } from '../utils/movie-list-validator';
 
 @Injectable({
   providedIn: 'root',
@@ -38,7 +39,7 @@ export class MovieListService {
 
   deleteList(listId: number): void{
     this.listsState.update((lists) =>
-      lists.filter((list) => list.id != listId)
+      lists.filter((list) => list.id !== listId)
     );
   }
 
@@ -67,7 +68,7 @@ export class MovieListService {
   toggleMovieInList(listId: number, movieId: number): void{
     this.listsState.update((lists) =>
       lists.map((list) => {
-        if(list.id != listId){
+        if(list.id !== listId){
           return list;
         }
 
@@ -89,8 +90,20 @@ export class MovieListService {
     if(!rawState){
       return [];
     }
+    try{
+      const parsedLists: unknown = JSON.parse(rawState);
 
-    return JSON.parse(rawState) as MovieList[];
+      if(!Array.isArray(parsedLists)) {
+        localStorage.removeItem(this.storageKey);
+        return [];
+      }
+
+      return parsedLists.filter(isMovieList);
+
+    } catch{
+      localStorage.removeItem(this.storageKey);
+      return [];
+    }
   }
 
   reorderMovies(listId: number, previousIndex : number, currentIndex: number): void {

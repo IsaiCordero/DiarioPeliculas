@@ -2,6 +2,7 @@ import { computed, effect, Injectable, signal } from "@angular/core";
 import { MOVIES } from "../data/movies.mock";
 import { Movie } from "../models/movie.model";
 import { MoviePersonalState } from "../models/movie-backup.model";
+import { isMoviePersonalState } from "../utils/movie-personal-state-validator";
 
 
 @Injectable({
@@ -20,7 +21,16 @@ export class MovieService {
         this.moviesState.set(this.loadMovies());
 
         effect(() => {
-            const moviesState = this.moviesState().map((movie) => ({
+            const moviesState = this.moviesState()
+            .filter((movie) =>
+                movie.userRating !== undefined ||
+                movie.watched ||
+                movie.pending ||
+                movie.favorite ||
+                movie.review ||
+                movie.watchedDate
+            )
+            .map((movie) => ({
                 id: movie.id,
                 userRating: movie.userRating,
                 watched: movie.watched,
@@ -86,7 +96,7 @@ export class MovieService {
     togglePending(movieId: number): void{
         this.moviesState.update((movies) =>
             movies.map((movie) => 
-                movie.id == movieId
+                movie.id === movieId
                     ? {...movie, pending: !movie.pending}
                     : movie
             )
@@ -100,26 +110,35 @@ export class MovieService {
             return MOVIES;
         }
 
-        const savedState = JSON.parse(rawState) as Pick<
-            Movie,
-            'id' | 'userRating' | 'watched' | 'pending' | 'review' | 'watchedDate' | 'favorite'
-        >[];
+        try{
+            const parsedState: unknown = JSON.parse(rawState);
+            
+            if (!Array.isArray(parsedState)) {
+                localStorage.removeItem(this.storageKey);
+                return MOVIES;
+            }
 
-        return MOVIES.map((movie) => {
-            const savedMovie = savedState.find((item) => item.id === movie.id);
+            const savedState = parsedState.filter(isMoviePersonalState);
 
-            return savedMovie
-                ? {
-                    ...movie,
-                    userRating: savedMovie.userRating,
-                    watched: savedMovie.watched,
-                    pending: savedMovie.pending,
-                    review: savedMovie.review,
-                    watchedDate: savedMovie.watchedDate,
-                    favorite: savedMovie.favorite
-                  }
+            return MOVIES.map((movie) => {
+                const savedMovie = savedState.find((item) => item.id === movie.id);
+
+                return savedMovie
+                    ? {
+                        ...movie,
+                        userRating: savedMovie.userRating,
+                        watched: savedMovie.watched,
+                        pending: savedMovie.pending,
+                        review: savedMovie.review,
+                        watchedDate: savedMovie.watchedDate,
+                        favorite: savedMovie.favorite
+                    }
                 : movie;
-        });
+            });
+        } catch{
+            localStorage.removeItem(this.storageKey);
+            return MOVIES;
+        }
     }
 
     updateReview(movieId:number, review: string): void {

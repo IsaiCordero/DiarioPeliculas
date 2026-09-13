@@ -2,6 +2,8 @@ import { Component, inject, signal } from '@angular/core';
 import { MovieService } from '../../../../core/services/movie.service';
 import { MovieListService } from '../../../../core/services/movie-list';
 import { MovieBackup } from '../../../../core/models/movie-backup.model';
+import { isMovieList } from '../../../../core/utils/movie-list-validator';
+import { isMoviePersonalState } from '../../../../core/utils/movie-personal-state-validator';
 
 @Component({
   selector: 'app-movie-settings',
@@ -119,51 +121,8 @@ export class MovieSettings {
       typeof backup.exportedAt === 'string' &&
       Array.isArray(backup.movies) &&
       Array.isArray(backup.lists) &&
-      backup.movies.every((movie) => this.isMoviePersonalState(movie)) &&
-      backup.lists.every((list) => this.isMovieList(list))
-    );
-  }
-
-  private isMoviePersonalState(value: unknown): boolean {
-    if(!value || typeof value !== 'object') {
-      return false;
-    }
-
-    const movie = value as Record<string, unknown>;
-
-    const ratingIsValid = 
-      movie['userRating'] === undefined ||
-        (
-          typeof movie['userRating'] === 'number' &&
-          movie['userRating'] >= 0.5 &&
-          movie['userRating'] <= 5 &&
-          movie['userRating'] * 2 === Math.round(movie['userRating'] * 2)
-        );
-
-    return (
-      typeof movie['id'] === 'number' &&
-      ratingIsValid &&
-      (movie['watched'] === undefined || typeof movie['watched'] === 'boolean') &&
-      (movie['pending'] === undefined || typeof movie['pending'] === 'boolean') &&
-      (movie['favorite'] === undefined || typeof movie['favorite'] === 'boolean') &&
-      (movie['review'] === undefined || typeof movie['review'] === 'string') &&
-      (movie['watchedDate'] === undefined || typeof movie['watchedDate'] === 'string')
-    );
-  }
-
-  private isMovieList(value: unknown): boolean {
-    if(!value || typeof value !== 'object'){
-      return false;
-    }
-
-    const list = value as Record<string, unknown>;
-
-    return(
-      typeof list['id'] === 'number' &&
-      typeof list['name'] === 'string' &&
-      (list['description'] === undefined || typeof list['description'] === 'string') &&
-      Array.isArray(list['movieIds']) &&
-      list['movieIds'].every((movieId) => typeof movieId === 'number')
+      backup.movies.every(isMoviePersonalState) &&
+      backup.lists.every(isMovieList)
     );
   }
 }
