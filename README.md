@@ -1,59 +1,110 @@
-# Peliculas
+# Películas — Diario de cine
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.2.8.
+Proyecto personal y educativo desarrollado con Angular, inspirado en
+Letterboxd. Permite explorar un catálogo de ejemplo, puntuar películas
+y organizar un diario de cine personal.
 
-## Development server
+## Funcionalidades
 
-To start a local development server, run:
+- Búsqueda por título, director y género.
+- Filtros por estado, género y década.
+- Ordenación por título, año, nota media, votos y puntuación personal.
+- Puntuaciones de 0,5 a 5 estrellas.
+- Películas vistas, pendientes y favoritas.
+- Reseñas personales y fecha de visualización.
+- Diario agrupado por meses y estadísticas personales.
+- Listas personalizadas con edición y ordenación mediante arrastrar y soltar.
+- Persistencia en el navegador mediante localStorage.
+- Exportación e importación de copias de seguridad en JSON.
+- Restablecimiento de los datos personales desde ajustes.
 
-```bash
-ng serve
+## Tecnologías
+
+Angular 21, TypeScript, Angular Router, Angular CDK y CSS.
+Pruebas unitarias con Vitest.
+
+## Capturas
+
+### Catálogo
+![Catálogo con filtros y puntuaciones](docs/screenshots/catalogo.png)
+
+### Detalle de película
+![Detalle con puntuación y reseña personal](docs/screenshots/detalle.png)
+
+### Listas personalizadas
+![Lista personalizada de películas](docs/screenshots/listas.png)
+
+## Arquitectura
+
+El proyecto está organizado por funcionalidades y responsabilidades:
+
+```text
+src/app/
+  core/
+    data/          Catálogo de ejemplo
+    models/        Interfaces y tipos
+    services/      Estado de películas, listas y persistencia
+    utils/         Filtros, ordenación, validadores y pruebas
+  features/
+    movies/
+      components/  Componentes específicos de películas
+      pages/       Catálogo, detalle, diario, estadísticas, listas y ajustes
+  shared/
+    components/    Cabecera, puntuación, estados e indicadores reutilizables
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+Los componentes standalone conectan las plantillas con el estado mediante
+signals y computed. Los servicios gestionan los datos compartidos y los
+helpers contienen funciones independientes para filtrar, ordenar y validar.
 
-## Code scaffolding
+## Ejecución local
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+Requisitos: Node.js 22.12 o superior dentro de la rama 22.x y npm.
 
-```bash
-ng generate component component-name
-```
-
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the project run:
+Clona el repositorio y abre una terminal en la carpeta que contiene
+`package.json`. Instala las dependencias y arranca la aplicación:
 
 ```bash
-ng build
+npm ci
+npm start
 ```
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+Abre http://localhost:4200/ en el navegador.
 
-## Running unit tests
+## Pruebas
 
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
+Para ejecutar las pruebas de los helpers:
 
 ```bash
-ng test
+npm test -- --watch=false --include="src/app/core/utils/*.spec.ts"
 ```
 
-## Running end-to-end tests
+Incluyen 33 casos de ordenación, filtros y validación de datos personales
+y listas.
 
-For end-to-end (e2e) testing, run:
+## Compilación
 
 ```bash
-ng e2e
+npm run build
 ```
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+Genera la aplicación en `dist/`. Este comando no publica el proyecto.
 
-## Additional Resources
+## Datos y limitaciones
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+El catálogo utiliza datos de ejemplo definidos en `movies.mock.ts`.
+No existe conexión con una API de películas, backend ni autenticación.
+
+Los datos personales se guardan en localStorage y dependen del navegador
+y del origen desde el que se abre la aplicación. No se sincronizan entre
+dispositivos y pueden perderse al borrar los datos del navegador.
+
+Desde ajustes se puede exportar un backup JSON y restaurarlo posteriormente.
+La importación sustituye los datos personales y las listas actuales tras
+pedir confirmación.
+
+## Objetivo educativo
+
+Practicar componentes reutilizables, comunicación entre padre e hijo,
+inyección de dependencias, estado reactivo, navegación, persistencia local
+y pruebas unitarias en Angular.

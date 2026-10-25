@@ -4,6 +4,7 @@ import { MovieListService } from '../../../../core/services/movie-list';
 import { MovieBackup } from '../../../../core/models/movie-backup.model';
 import { isMovieList } from '../../../../core/utils/movie-list-validator';
 import { isMoviePersonalState } from '../../../../core/utils/movie-personal-state-validator';
+import { hasMoviePersonalState, toMoviePersonalState } from '../../../../core/utils/movie-personal-state';
 
 @Component({
   selector: 'app-movie-settings',
@@ -38,23 +39,8 @@ export class MovieSettings {
       version: 1,
       exportedAt: new Date().toISOString(),
       movies: this.movieService.movies()
-      .filter((movie)=>
-        movie.userRating !== undefined ||
-        movie.watched ||
-        movie.pending ||
-        movie.favorite ||
-        movie.review ||
-        movie.watchedDate
-      )
-      .map((movie) => ({
-        id: movie.id,
-        userRating: movie.userRating,
-        watched: movie.watched,
-        pending: movie.pending,
-        favorite: movie.favorite,
-        review: movie.review,
-        watchedDate: movie.watchedDate
-      })),
+      .filter(hasMoviePersonalState)
+      .map(toMoviePersonalState),
       lists: this.movieListService.lists(),
     };
 

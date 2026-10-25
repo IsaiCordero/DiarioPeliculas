@@ -3,6 +3,7 @@ import { MOVIES } from "../data/movies.mock";
 import { Movie } from "../models/movie.model";
 import { MoviePersonalState } from "../models/movie-backup.model";
 import { isMoviePersonalState } from "../utils/movie-personal-state-validator";
+import { hasMoviePersonalState, toMoviePersonalState } from "../utils/movie-personal-state";
 
 
 @Injectable({
@@ -22,23 +23,8 @@ export class MovieService {
 
         effect(() => {
             const moviesState = this.moviesState()
-            .filter((movie) =>
-                movie.userRating !== undefined ||
-                movie.watched ||
-                movie.pending ||
-                movie.favorite ||
-                movie.review ||
-                movie.watchedDate
-            )
-            .map((movie) => ({
-                id: movie.id,
-                userRating: movie.userRating,
-                watched: movie.watched,
-                pending: movie.pending,
-                review: movie.review,
-                watchedDate: movie.watchedDate,
-                favorite: movie.favorite
-            }));
+                .filter(hasMoviePersonalState)
+                .map(toMoviePersonalState);
 
             localStorage.setItem(this.storageKey, JSON.stringify(moviesState));
         });
