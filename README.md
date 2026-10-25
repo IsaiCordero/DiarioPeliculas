@@ -26,13 +26,13 @@ Pruebas unitarias con Vitest.
 ## Capturas
 
 ### Catálogo
-![Catálogo con filtros y puntuaciones](docs/screenshots/catalogo.png)
+![Catálogo con filtros y puntuaciones](src/docs/screenshots/catalogo.png)
 
 ### Detalle de película
-![Detalle con puntuación y reseña personal](docs/screenshots/detalle.png)
+![Detalle con puntuación y reseña personal](src/docs/screenshots/detalle.png)
 
 ### Listas personalizadas
-![Lista personalizada de películas](docs/screenshots/listas.png)
+![Lista personalizada de películas](src/docs/screenshots/listas.png)
 
 ## Arquitectura
 
